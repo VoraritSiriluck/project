@@ -1,8 +1,8 @@
 <?php
 require_once('connection.php');
 
-
 if (isset($_REQUEST["delete_id"])) {
+    /** ดึงข้อมูลไว้ทำไม ???? */
     $id = $_REQUEST['delete_id'];
     $select_stmt = $db->prepare("SELECT * FROM clean_report WHERE id=:id");
     $select_stmt->bindParam(':id', $id);
