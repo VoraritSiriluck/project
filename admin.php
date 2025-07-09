@@ -1,7 +1,6 @@
 <?php
 require_once('connection.php');
 
-
 //
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
@@ -14,7 +13,7 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['username']);
     header('location: login.php');
 }
-//
+
 if (isset($_GET['deleteat_id'])) {
     $row = $_GET['deleteat_id'];
 }
@@ -47,7 +46,6 @@ if (isset($_GET['deleteat_id'])) {
                 </svg>
                 <span class="fs-4"><b>แบบฟอร์มคำร้องขอทำความสะอาดพื้นที่</b></span>
             </a>
-
             <hr>
             <form action="" method="POST" id="search" class="mb-4">
                 <div class="mb-2">
@@ -68,11 +66,9 @@ if (isset($_GET['deleteat_id'])) {
                 <input type="submit" name="search" class="btn btn-success w-100" value="Search">
             </form>
             <hr>
-
             <button type="button" class="btn btn-warning w-100 mb-2 " data-bs-toggle="modal" data-bs-target="#CreateUser">
                 Create User
             </button>
-
             <button type="button" class="btn btn-light w-100 mb-2" data-bs-toggle="modal" data-bs-target="#CreateRoom">
                 Create Room
             </button>
@@ -84,7 +80,7 @@ if (isset($_GET['deleteat_id'])) {
             <button type="button" class="btn btn-danger w-100 mb-2" data-bs-toggle="modal" data-bs-target="#Logout">
                 Logout
             </button>
-            
+
             <!-- <button class="btn btn=danger w-100" onclick="logoutconfirm()">Logout</button>
 
             <script>
@@ -101,114 +97,10 @@ if (isset($_GET['deleteat_id'])) {
             >
             Logout</a> -->
         </nav>
-        <!-- Modal User-->
 
-        <div class="modal fade" id="CreateUser" tabindex="-1" aria-labelledby="CreateUserLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="CreateUserLabel">Create User</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <?php
-                    if (isset($_GET['message']) && $_GET['modal']   === 'user') {
-                        $alert_class = $_GET['status'] === 'success' ? 'alert-success' : 'alert-danger';
-                        echo "<div class='alert $alert_class mx-5 mt-2'>" . htmlspecialchars($_GET['message']) . "</div>";
-                    }
-                    ?>
-                    <form action="admin-create-user.php" method="POST">
-                        <div class="modal-body">
-                            <div class="row-4">
-                                <div class="col">
-                                    <label for="" class="form-label">Username :</label>
-                                    <input type="text" class="form-control" name="new_username" required>
-
-                                </div>
-                                <div class="col">
-                                    <label for="" class="form-label">Password :</label>
-                                    <input type="password" class="form-control" name="new_password" required>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-
-                            <button type="submit" class="btn btn-success " name="btn-createuser">Create New User</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- Modal Room-->
-        <div class="modal fade" id="CreateRoom" tabindex="-1" aria-labelledby="CreateRoomLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="CreateRoomLabel">Create Room</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <?php
-                    if (isset($_GET['message']) && $_GET['modal'] === 'room') {
-                        $alert_class = $_GET['status'] === 'success' ? 'alert-success' : 'alert-danger';
-                        echo "<div class='alert $alert_class mx-5 mt-2'>" . htmlspecialchars($_GET['message']) . "</div>";
-                    }
-                    ?>
-                    <form action="admin-create-room.php" method="POST">
-                        <div class="modal-body">
-                            <div class="row-4">
-                                <div class="col">
-                                    <label for="" class="form-label">New Room :</label>
-                                    <input type="text" class="form-control" name="new_room" required>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-
-                            <button type="submit" class="btn btn-success " name="btn-createroom">Create New Room</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Modal logout -->
-        <div class="modal fade" id="Logout" tabindex="-1" aria-labelledby="LogoutLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="LogoutLabel">Logout</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <?php
-                    if (isset($_GET['message']) && $_GET['modal'] === 'room') {
-                        $alert_class = $_GET['status'] === 'success' ? 'alert-success' : 'alert-danger';
-                        echo "<div class='alert $alert_class mx-5 mt-2'>" . htmlspecialchars($_GET['message']) . "</div>";
-                    }
-                    ?>
-                     <form action="admin.php" method="POST">
-                        <div class="modal-body">
-                            <div class="row-4">
-                                <div class="col">
-                                    <h6>คุณต้องการจะออกจากระบบใช่หรือไม่</h6>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                            <a href="admin.php?logout='1'" class="btn btn-danger " name="btn-logout-logout">Logout</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-
+        <?php include('./modal-create-user.php') ?>
+        <?php include('./modal-create-room.php') ?>
+        <?php include('./modal-logout.php') ?>
 
         <div class="flex-grow-1 p-4" style="margin-left: 280px;">
 
@@ -272,8 +164,8 @@ if (isset($_GET['deleteat_id'])) {
 
                                 switch ($status) {
                                     case "waiting":
-                                        $badge_status ="badge text-bg-dark";
-                                        $status_text ="รอตรวจสอบ";
+                                        $badge_status = "badge text-bg-dark";
+                                        $status_text = "รอตรวจสอบ";
                                         break;
                                     case "in_progress":
                                         $badge_status = "badge text-bg-warning";
@@ -293,7 +185,7 @@ if (isset($_GET['deleteat_id'])) {
                                         break;
                                 }
                                 ?>
-                                <span class="<?php echo $badge_status;?>"><?php echo $status_text?></span>
+                                <span class="<?php echo $badge_status; ?>"><?php echo $status_text ?></span>
                             </td>
                             <td><a href="inspect.php?check_id=<?php echo $row["id"]; ?>" class="btn btn-success">Check</a></td>
                             <td><a href="admin-delete.php?delete_id=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('คุณต้องการจะลบข้อมูลนี้ใช่หรือไม่?')">Delete</a></td>
@@ -306,7 +198,6 @@ if (isset($_GET['deleteat_id'])) {
         </div>
         <?php include("script.php") ?>
         <script>
-
             // searchCategory
             const category = document.getElementById("searchCategory");
             const textInput = document.getElementById("textWrapper");
@@ -323,9 +214,6 @@ if (isset($_GET['deleteat_id'])) {
                 }
             });
 
-
-
-
             //เรียกใช้ Datatable  |id table ต้องตรงกับ #
             $(document).ready(function() {
                 $('#myTable').DataTable({
@@ -334,13 +222,6 @@ if (isset($_GET['deleteat_id'])) {
                     ]
                 });
             });
-
-
-            
-
-
-
-
 
             // Modal
             const urlParam = new URLSearchParams(window.location.search);
@@ -361,8 +242,6 @@ if (isset($_GET['deleteat_id'])) {
 
                 // const status = urlParam.get('status');
                 // const message = urlParam.get('message');
-
-
 
                 // if (message && status && document.getElementById('CreateUser')){
                 //     new bootstrap.Modal(document.getElementById('CreateUser')).show();

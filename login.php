@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-login-image"> 
+                        <div class="col-lg-6 d-none d-lg-block bg-login-image">
                             <img src="image/logo_osit.png" alt="" class="mx-auto d-block border-left-primary" style="width:80%; margin-top:110px;">
                         </div>
                         <div class="col-lg-6">
@@ -71,30 +71,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <h1 class="h4 text-gray-900 mb-4">Cleaning Report Check System</h1>
                                 </div>
                                 <hr>
-                                <?php if (isset($error)) :?>
+                                <?php if (isset($error)) : ?>
                                     <div class="alert alert-danger mt-2">
-                                            <?php echo htmlspecialchars($error);?>
+                                        <?php echo htmlspecialchars($error); ?>
 
                                     </div>
-                                    <?php endif; ?>
+                                <?php endif; ?>
                                 <form class="user" method="POST">
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user mb-2"  name="username" aria-describedby="emailHelp" placeholder="Username">
+                                        <input type="text" class="form-control form-control-user mb-2" name="username" aria-describedby="emailHelp" placeholder="Username">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user mb-2" name="password"  placeholder="Password">
+                                        <input type="password" class="form-control form-control-user mb-2" name="password" placeholder="Password">
                                     </div>
                                     <div class="form-group">
-                                        
+
                                     </div>
                                     <hr>
                                     <button class="btn btn-success my-3 fs-5">Log-In>></button>
                                     <!-- <input type="submit" class="btn btn-success my-3 fs-5 " value="Log-In>>"> -->
-                                    
-                                    
+
+
                                 </form>
-                               
-                                
+
+
                             </div>
                         </div>
                     </div>
