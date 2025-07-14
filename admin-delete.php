@@ -1,7 +1,6 @@
 <?php
 require_once('connection.php');
 
-
 if (isset($_REQUEST["delete_id"])) {
     $id = $_REQUEST['delete_id'];
     $select_stmt = $db->prepare("SELECT * FROM clean_report WHERE id=:id");

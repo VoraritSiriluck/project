@@ -1,6 +1,4 @@
 <?php
-
-
 require_once('connection.php');
 
 
@@ -66,7 +64,7 @@ if (isset($_GET['check_id'])) {
 
 
             <a href="chart.php" class="btn btn-primary w-100 mb-2">Chart</a>
-             <button type="button" class="btn btn-danger w-100 mb-2" data-bs-toggle="modal" data-bs-target="#Logout">
+            <button type="button" class="btn btn-danger w-100 mb-2" data-bs-toggle="modal" data-bs-target="#Logout">
                 Logout
             </button>
             <!-- <a href="admin.php?logout='1'" class="btn btn-danger w-100">Logout</a> -->
@@ -145,111 +143,10 @@ if (isset($_GET['check_id'])) {
 
 
         </nav>
-
-        <!-- Modal User-->
-
-        <div class="modal fade" id="CreateUser" tabindex="-1" aria-labelledby="CreateUserLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="CreateUserLabel">Create User</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <?php
-                    if (isset($_GET['message']) && $_GET['modal']   === 'user') {
-                        $alert_class = $_GET['status'] === 'success' ? 'alert-success' : 'alert-danger';
-                        echo "<div class='alert $alert_class mx-5 mt-2'>" . htmlspecialchars($_GET['message']) . "</div>";
-                    }
-                    ?>
-                    <form action="admin-create-user.php" method="POST">
-                        <div class="modal-body">
-                            <div class="row-4">
-                                <div class="col">
-                                    <label for="" class="form-label">Username :</label>
-                                    <input type="text" class="form-control" name="new_username" required>
-
-                                </div>
-                                <div class="col">
-                                    <label for="" class="form-label">Password :</label>
-                                    <input type="password" class="form-control" name="new_password" required>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-
-                            <button type="submit" class="btn btn-success " name="btn-createuser">Create New User</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- Modal Room-->
-        <div class="modal fade" id="CreateRoom" tabindex="-1" aria-labelledby="CreateRoomLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="CreateRoomLabel">Create Room</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <?php
-                    if (isset($_GET['message']) && $_GET['modal'] === 'room') {
-                        $alert_class = $_GET['status'] === 'success' ? 'alert-success' : 'alert-danger';
-                        echo "<div class='alert $alert_class mx-5 mt-2'>" . htmlspecialchars($_GET['message']) . "</div>";
-                    }
-                    ?>
-                    <form action="admin-create-room.php" method="POST">
-                        <div class="modal-body">
-                            <div class="row-4">
-                                <div class="col">
-                                    <label for="" class="form-label">New Room :</label>
-                                    <input type="text" class="form-control" name="new_room" required>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                    
-                            <button type="submit" class="btn btn-success " name="btn-createroom">Create New Room</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal logout -->
-        <div class="modal fade" id="Logout" tabindex="-1" aria-labelledby="LogoutLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="LogoutLabel">Logout</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <?php
-                    if (isset($_GET['message']) && $_GET['modal'] === 'room') {
-                        $alert_class = $_GET['status'] === 'success' ? 'alert-success' : 'alert-danger';
-                        echo "<div class='alert $alert_class mx-5 mt-2'>" . htmlspecialchars($_GET['message']) . "</div>";
-                    }
-                    ?>
-                     <form action="admin.php" method="POST">
-                        <div class="modal-body">
-                            <div class="row-4">
-                                <div class="col">
-                                    <h6>คุณต้องการจะออกจากระบบใช่หรือไม่</h6>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                            <a href="admin.php?logout='1'" class="btn btn-danger " name="btn-logout-logout">Logout</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
+        
+        <?php include('./modal-create-user.php')?>
+        <?php include('./modal-create-room.php')?>
+        <?php include('./modal-logout.php')?>
 
         <div class="container bg-secondary px-5 pb-3" style="height:100%; margin-left:280px;">
             <header class="row d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
