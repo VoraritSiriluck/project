@@ -39,8 +39,107 @@ try {
 </style>
 
 
-<body class="body">
-    <div class="container bg-primary pb-4 mb-0">
+<body class="bg-primary bg-opacity-10">
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="row g-0 shadow rounded overflow-hidden">
+                    <!-- ซ้าย: รูปภาพ -->
+                    <div class="col-md-6 bg-white d-flex align-items-center justify-content-center p-4">
+                        <img src="image/logo_osit.png" class="img-fluid rounded" alt="ตัวอย่างภาพ">
+                    </div>
+
+                    <!-- ขวา: ฟอร์ม -->
+                    <div class="col-md-6 bg-primary text-white p-4">
+                        <h5 class="mb-4">ฟอร์มแจ้งปัญหา / รายงาน</h5>
+                        <?php
+                        if (isset($errorMsg)) {
+                        ?>
+                            <div class="alert alert-danger">
+                                <strong>ผิดพลาด <?php echo $errorMsg ?></strong>
+                            </div>
+                        <?php } ?>
+
+
+                        <?php
+                        if (isset($insertMsg)) {
+                        ?>
+                            <div class="alert alert-success">
+                                <strong><?php echo $insertMsg ?></strong>
+                            </div>
+                        <?php } ?>
+                        <form method="POST" class="" enctype="multipart/form-data" action="insert-data.php">
+
+
+
+                            <!-- ชื่อ -->
+                            <div class="mb-3">
+                                <label for="name" class="form-label">ชื่อ</label>
+                                <select name="reporter_name" id="reporter_name" class="form-select">
+                                    <option value="">--กรุณาระบุชื่อผู้รายงาน--</option>
+
+                                </select>
+                            </div>
+
+                            <!-- ฝ่าย -->
+                            <div class="mb-3">
+                                <label for="department" class="form-label">ฝ่าย</label>
+                                <select name="position" class="form-select" required>
+                                    <option value="">--กรุณาระบุฝ่าย--</option>
+                                    <option value="ฝ่ายการบริหารและการจัดการ">ฝ่ายการบริหารและการจัดการ</option>
+                                    <option value="ฝ่ายบริการเครื่องมือวิจัยทางวิทยาศาสตร์">ฝ่ายบริการเครื่องมือวิจัยทางวิทยาศาสตร์</option>
+                                    <option value="ฝ่ายซ่อมบำรุงรักษาและพัฒนาเครื่องมือ">ฝ่ายซ่อมบำรุงรักษาและพัฒนาเครื่องมือ</option>
+                                </select>
+                            </div>
+
+                            <!-- วันที่ -->
+                            <div class="mb-3">
+                                <label for="date" class="form-label">วันที่</label>
+                                <input type="date" class="form-control" name="report_date" max="<?php echo date("Y-m-d"); ?>" required>
+                            </div>
+
+                            <!-- ห้อง -->
+                            <div class="mb-3">
+                                <label for="room" class="form-label">ห้อง</label>
+                                <select name="room" id="room" class="form-select" required>
+                                    <option value="">--กรุณาระบุห้อง--</option>
+                                    <?php foreach ($room as $room): ?>
+                                        <option value="<?= htmlspecialchars($room['room_name']) ?>">
+                                            <?= htmlspecialchars($room['room_name']) ?>
+                                        </option>
+                                    <?php endforeach ?>
+                                </select>
+                                <input type="text" class="form-control  mt-2" id="other_room" name="other_room" placeholder="กรุณาระบุห้อง" disabled>
+                            </div>
+
+                            <!-- รายละเอียด -->
+                            <div class="mb-3">
+                                <label for="details" class="form-label">รายละเอียด</label>
+                                <textarea class="form-control" placeholder="detail" name="detail" style="height: 100px" required></textarea>
+                            </div>
+
+                            <!-- Upload รูปภาพ -->
+                            <div class="mb-4">
+                                <label for="image" class="form-label">อัปโหลดรูปภาพ</label>
+                                <input type="file" name="img_file" required class="form-control mt-2" accept="image/jpeg, image/png, image/jpg"> <br>
+                                <span color="red" class="text mb-2 text-danger"><b>*อัพโหลดได้เฉพาะ .jpeg , .jpg , .png </b></span>
+                            </div>
+
+                            <!-- ปุ่มส่ง -->
+                            <div class="d-grid">
+                                <input type="submit" class="btn btn-light rounded-pill" name="btn_report" value="ส่งรายงาน >>">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="container bg-primary pb-4 mb-0">
+
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <a href=""
                 class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
@@ -53,28 +152,12 @@ try {
             </a>
 
         </header>
-        <?php
-        if (isset($errorMsg)) {
-        ?>
-            <div class="alert alert-danger">
-                <strong>ผิดพลาด <?php echo $errorMsg ?></strong>
-            </div>
-        <?php } ?>
 
-
-        <?php
-        if (isset($insertMsg)) {
-        ?>
-            <div class="alert alert-success">
-                <strong><?php echo $insertMsg ?></strong>
-            </div>
-        <?php } ?>
 
         <form method="POST" class="row bg-secondary p-4 m-4 rounded-5" enctype="multipart/form-data" action="insert-data.php">
 
             <div class="row-cols-2 mb-1">
                 <label for="" class="form-label text-white"><b>กรุณากรอกชื่อผู้รายงาน : </b></label>
-                <!-- <input type="text" class="form-control" name="reporter_name" placeholder="reporter name" required>-->
                 <select name="reporter_name" id="reporter_name" class="form-select">
                     <option value="">--กรุณาระบุชื่อผู้รายงาน--</option>
 
@@ -89,7 +172,7 @@ try {
                         <option value="ฝ่ายบริการเครื่องมือวิจัยทางวิทยาศาสตร์">ฝ่ายบริการเครื่องมือวิจัยทางวิทยาศาสตร์</option>
                         <option value="ฝ่ายซ่อมบำรุงรักษาและพัฒนาเครื่องมือ">ฝ่ายซ่อมบำรุงรักษาและพัฒนาเครื่องมือ</option>
                     </select>
-                    <!--<input type="text" class="form-control" name="position" placeholder="position" required>-->
+
                 </div>
                 <div class="col-md-6">
                     <label for="" class="form-label text-white"><b>วันที่แจ้ง : </b></label>
@@ -100,24 +183,12 @@ try {
                 <label for="" class="form-label text-white"><b>ห้องที่รายงาน : </b></label>
                 <select name="room" id="room" class="form-select" required>
                     <option value="">--กรุณาระบุห้อง--</option>
-                    <?php foreach ($room as $room): ?>
-                        <option value="<?= htmlspecialchars($room['room_name']) ?>">
-                            <?= htmlspecialchars($room['room_name']) ?>
-                        </option>
-                    <?php endforeach ?>
+                    
                 </select>
                 <input type="text" class="form-control  mt-2" id="other_room" name="other_room" placeholder="กรุณาระบุห้อง" disabled>
-                <!-- <input type="text" class="form-control" name="room" placeholder="room" required> -->
+
             </div>
-            <!--<div class="row-cols-2 mb-3">
-                <label for="" class="form-label text-white"><b>ชื่อผู้รับผิดชอบดูแลความสะอาด : </b></label>
-                <select class="form-select" aria-label="Default select example" name="cleaner"required>
-                    <option selected>รายชื่อพนักงานทำความสะอาด</option>
-                    <option value="1">นางสาววาสนา มุสิกรัตน์</option>
-                    <option value="2">นางสาวอินทุอร รัตนบุญโณ</option>
-                    <option value="3">คนอื่น</option>
-                </select>
-            </div>-->
+
             <div class="">
                 <label for="" class="form-label text-white"><b>รายละเอียด : </b></label>
                 <textarea class="form-control" placeholder="detail" name="detail" style="height: 100px" required></textarea>
@@ -125,10 +196,9 @@ try {
             </div>
             <div>
                 <label for="" class="form-label text-white mt-2"><b>อัพโหลดรูปภาพ : </b></label>
-                <!-- <input type="text" name="img_name" required class="form-control " placeholder="ชื่อภาพ"> <br>-->
                 <input type="file" name="img_file" required class="form-control mt-2" accept="image/jpeg, image/png, image/jpg"> <br>
                 <span color="red" class="text mb-2 text-danger"><b>*อัพโหลดได้เฉพาะ .jpeg , .jpg , .png </b></span>
-                <!-- <button type="submit" class="btn btn-primary mt-1">Upload Picture</button> -->
+
 
             </div>
 
@@ -148,7 +218,7 @@ try {
 
 
 
-    </div>
+    </div> -->
 
     <?php include("script.php") ?>
     <script>
