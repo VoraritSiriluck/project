@@ -39,11 +39,18 @@ if (isset($_GET['check_id'])) {
 
 </head>
 
+<style>
+    .status{
+        background-color: #093FB4;
+        padding: 15px;
+        border-radius: 1rem;
+    }
+</style>
 
-<body class="bg-secondary">
+<body class="bg-light">
     <!-- Side Bar -->
     <div class="d-flex">
-        <nav class="bg-dark text-light p-3 vh-100" style="width: 280px; position:fixed;">
+        <nav class="bg-primary text-light p-3 vh-100" style="width: 280px; position:fixed; ">
             <a href="inspect.php?check_id=<?php echo $row["id"]; ?>" class="d-flex align-items-center mb-4 text-white text-decoration-none">
                 <svg class="bi me-2" width="40" height="32" aria-hidden="true">
                     <use xlink:href="#bootstrap"></use>
@@ -54,17 +61,17 @@ if (isset($_GET['check_id'])) {
 
             <hr>
 
-            <button type="button" class="btn btn-warning w-100 mb-2" data-bs-toggle="modal" data-bs-target="#CreateUser">
+            <button type="button" class="btn btn-warning w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateUser">
                 Create User
             </button>
-            <button type="button" class="btn btn-light w-100 mb-2" data-bs-toggle="modal" data-bs-target="#CreateRoom">
+            <button type="button" class="btn btn-light w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateRoom">
                 Create Room
             </button>
 
 
 
-            <a href="chart.php" class="btn btn-primary w-100 mb-2">Chart</a>
-            <button type="button" class="btn btn-danger w-100 mb-2" data-bs-toggle="modal" data-bs-target="#Logout">
+            <a href="chart.php" class="btn btn-dark w-100 mb-2 shadow rounded">Chart</a>
+            <button type="button" class="btn btn-danger w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout">
                 Logout
             </button>
             <!-- <a href="admin.php?logout='1'" class="btn btn-danger w-100">Logout</a> -->
@@ -81,7 +88,7 @@ if (isset($_GET['check_id'])) {
             <!-- Status -->
             <form action="update-status.php" method="POST">
                 <input type="hidden" name="reporter_id" value="<?php echo $id; ?>">
-                <div class="bg-secondary p-3 rounded-3">
+                <div class="bg-light bg-opacity-25 p-2 rounded shadow rounded">
                     <span class=" fs-4 "><b>Status : </b></span>
                     <div class="text-center">
                         <div class="form-check mt-2 my-2">
@@ -118,7 +125,7 @@ if (isset($_GET['check_id'])) {
 
 
                     <div class="text-end mt-3">
-                        <button type="submit" class="btn btn-light">Update Status</button>
+                        <button type="submit" class="btn btn-light shadow rounded">Update Status</button>
                     </div>
                 </div>
             </form>
@@ -143,23 +150,29 @@ if (isset($_GET['check_id'])) {
 
 
         </nav>
-        
-        <?php include('./modal-create-user.php')?>
-        <?php include('./modal-create-room.php')?>
-        <?php include('./modal-logout.php')?>
 
-        <div class="container bg-secondary px-5 pb-3" style="height:100%; margin-left:280px;">
+        <?php include('./modal-create-user.php') ?>
+        <?php include('./modal-create-room.php') ?>
+        <?php include('./modal-logout.php') ?>
+
+        <div class="container bg-light px-5 pb-3" style="height:100%; margin-left:280px;">
             <header class="row d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
                 <div class="col d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                    <div class="h2 text-primary">
+                        <b>Inspect</b>
+                        
+                    </div>
+                    
                     <svg
                         class="bi me-2" width="40" height="32" aria-hidden="true">
                         <use xlink:href="#bootstrap"></use>
                     </svg> <span class="fs-4 text-light"></span>
                 </div>
-                <a href="admin.php" class="col-md-1 me-5   align-items-end btn btn-light  "><b>Back</b></a>
+                <a href="admin.php" class="col-md-1 me-5 mt-3 align-item-end btn btn-primary  shadow"><b>Back</b></a>
+                <h5 class="text-secondary">ตรวจสอบข้อมูลรายงาน</h5>
             </header>
 
-            <div class="row pb-5 pt-2 mb-1 bg-light rounded-4">
+            <div class="row pb-5 pt-2 mb-1 bg-light rounded-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
                 <!--LEFT -->
                 <div class="col ">
                     <div class="bg-dark text-white mb-2 rounded-3 ">
@@ -170,20 +183,20 @@ if (isset($_GET['check_id'])) {
                         <!--LLLLL-->
                         <div class="col my-1 ">
                             <div class="text-black my-2  text-start fs-5"><b>ชื่อผู้รายงาน : </b></div>
-                            <div class="bg-white border border-black   my-2 ps-1 fs-5 text-black rounded-2"><?php echo $reporter_fullname ?></div>
+                            <div class="bg-white border border-black   my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $reporter_fullname ?></div>
                             <div class="text-black my-2 text-start fs-5"><b>ตำแหน่งผู้รายงาน : </b></div>
-                            <div class="bg-white border border-black   my-2 ps-1 fs-5 text-black rounded-2"><?php echo $position ?></div>
+                            <div class="bg-white border border-black   my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $position ?></div>
                             <div class="row">
-                                <div class="col text-black text-start fs-5"><b>วันที่รายงาน(ว/ด/ป) : </b></div>
+                                <div class="col text-black text-start fs-5 "><b>วันที่รายงาน(ว/ด/ป) : </b></div>
                                 <div class="col text-black text-start fs-5"><b>ปีงบประมาณ : </b></div>
                             </div>
                             <div class="row mx-1 ">
-                                <div class="col bg-white border border-black  me-3 my-2 ps-1 fs-5 text-black rounded-2"><?php echo $thai_time ?></div>
-                                <div class="col bg-white border border-black   my-2 ps-1 fs-5 text-black rounded-2"><?php echo $number ?></div>
+                                <div class="col bg-white border border-black  me-3 my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $thai_time ?></div>
+                                <div class="col bg-white border border-black   my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $number ?></div>
                             </div>
 
                             <div class="text-black text-start fs-5"><b>ห้องที่รายงาน :</b></div>
-                            <div class="bg-white border border-black   my-2 ps-1 fs-5 text-black rounded-2"><?php echo $room ?></div>
+                            <div class="bg-white border border-black   my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $room ?></div>
 
                         </div>
                         <!--RRRRR-->
@@ -205,7 +218,7 @@ if (isset($_GET['check_id'])) {
                     <div class="bg-warning text-white text-start mb-2 rounded-3">
                         <h1 class="ms-3 mt-4"> Picture : </h1>
                     </div>
-                    <img src="<?php echo $newname; ?>" class=" img-thumbnail rounded mx-auto d-block " style="width:100%; object-fit:cover;" alt="...">
+                    <img src="<?php echo $newname; ?>" class=" img-thumbnail shadow bg-body-tertiary rounded mx-auto d-block " style="width:100%; object-fit:cover;" alt="...">
                 </div>
                 <hr>
 
@@ -213,7 +226,7 @@ if (isset($_GET['check_id'])) {
                     <div class="text-black fs-5"><b>รายละเอียด :</b></div>
                     <!--<div class="bg-white border border-black ps-1 fs-5 "><?php //echo $detail 
                                                                                 ?></div>-->
-                    <textarea readonly class="fs-5 rounded-3 w-100" rows="4"><?php echo htmlspecialchars($detail) ?></textarea>
+                    <textarea readonly class="fs-5 w-100 shadow bg-body-tertiary rounded" rows="4"><?php echo htmlspecialchars($detail) ?></textarea>
 
                 </div>
 

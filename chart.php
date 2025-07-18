@@ -64,11 +64,11 @@ if (isset($_POST['date_search'])) {
     }
 </style>
 
-<body class="bg-dark">
+<body class="bg-primary">
     <!-- Side Bar -->
     <div class="d-flex">
-        
-        <nav class="bg-dark text-light p-3 vh-100" style="width: 280px; position:fixed;">
+
+        <nav class="bg-primary text-light p-3 vh-100" style="width: 280px; position:fixed;">
             <a href="chart.php" class="d-flex align-items-center mb-4 text-white text-decoration-none">
                 <svg class="bi me-2" width="40" height="32" aria-hidden="true">
                     <use xlink:href="#bootstrap"></use>
@@ -76,90 +76,101 @@ if (isset($_POST['date_search'])) {
                 <span class="fs-4"><b>Chart </b></span>
             </a>
             <hr>
-            <button type="button" class="btn btn-warning w-100 mb-2 " data-bs-toggle="modal" data-bs-target="#CreateUser">
+            <button type="button" class="btn btn-warning w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateUser">
                 Create User
             </button>
 
-            <button type="button" class="btn btn-light w-100 mb-2" data-bs-toggle="modal" data-bs-target="#CreateRoom">
+            <button type="button" class="btn btn-light w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateRoom">
                 Create Room
             </button>
-            <a href="chart.php" class="btn btn-primary w-100 mb-2">Chart</a>
+            <a href="chart.php" class="btn btn-dark w-100 mb-2 shadow rounded">Chart</a>
             <!-- <a href="admin.php?logout='1'" class="btn btn-danger w-100">Logout</a> -->
-            <button type="button" class="btn btn-danger w-100 mb-2" data-bs-toggle="modal" data-bs-target="#Logout">
+            <button type="button" class="btn btn-danger w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout">
                 Logout
             </button>
         </nav>
-                    <?php include('./modal-create-user.php') ?>
-                    <?php include('./modal-create-room.php') ?>
-                    <?php include('./modal-logout.php') ?>
+        <?php include('./modal-create-user.php') ?>
+        <?php include('./modal-create-room.php') ?>
+        <?php include('./modal-logout.php') ?>
 
         <div class="container bg-light rounded-3" style="margin-left:280px;">
+
             <header class="d-flex flex-warp justify-content-center py-3 mb-4 border-bottom ">
                 <a href=""
                     class="d-flex align-item-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                    <svg 
+                    <svg
                         class="bi me-2" width="40" height="32" aria-hidden="true">
                         <use xlink:href="#bootstrap"></use>
                     </svg>
-
-                    <form action="">
-                        <span class="me-1"><b>ค้นหาช่วงเวลา ตั้งแต่: </b></span>
-                        <input type="date" name="date_start" class="me-1" required>
-                        <span class="me-1"><b>จนถึง</b></span>
-                        <input type="date" name="date_end" class="me-2" required>
-                        <input type="submit" name="date_search" class="btn btn-success px-4" value="Search">
-                    </form>
-                    <a href="javascript:window.history.back()" class="col-md-1 me-5 mt-3 align-item-end btn btn-dark">
-                        <b>Back</b></a>
-                    </a>
-            </header> 
-                    <div class="backchart">
-                        <canvas id="chart"></canvas>
+                    <div class="text-primary ">
+                        <h1><b>สถิติการส่งรายงาน</b></h1>
+                        
                     </div>
+                    <div class="mt-3 " style="margin-left: 90px;">
+                        <form action="">
+                            <span class="me-1"><b>ค้นหาช่วงเวลา ตั้งแต่: </b></span>
+                            <input type="date" name="date_start" class="me-1" required>
+                            <span class="me-1"><b>จนถึง</b></span>
+                            <input type="date" name="date_end" class="me-2" required>
+                            <input type="submit" name="date_search" class="btn btn-success px-4 shadow rounded" value="Search">
+                        </form>
+                    </div>
+                    
+                    <a href="admin.php" class="col-md-1 me-2 mt-3 align-item-end btn btn-primary shadow rounded">
+                        <b>Back</b></a>
+                </a>
+                
+                
+                
+            </header>
+            
+            <div class="backchart">
+                <canvas id="chart"></canvas>
+            </div>
         </div>
 
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script>
-        Chart.defaults.font.size = 16;
-        const ctx = document.getElementById('chart');
+        <script>
+            Chart.defaults.font.size = 16;
+            const ctx = document.getElementById('chart');
 
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [<?php echo implode(",", $report_d) ?>],
-                datasets: [{
-                    label: 'จำนวนรายงานในแต่ละวัน',
-                    data: [<?php echo implode(",", $report_count) ?>],
-                    fill: true, //false,
-                    borderColor: 'rgb(255, 0, 0)',
-                    tension: 0.1,
-                    //borderWidth: 1
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [<?php echo implode(",", $report_d) ?>],
+                    datasets: [{
+                        label: 'จำนวนรายงานในแต่ละวัน',
+                        data: [<?php echo implode(",", $report_count) ?>],
+                        fill: true, //false,
+                        borderColor: 'rgb(255, 0, 0)',
+                        tension: 0.1,
+                        //borderWidth: 1
 
-                }]
-            },
-            options: {
-                plugin: {
-                    legend: {
-                        labels: {
-                            font: {
-                                size: 50
-                            }
+                    }]
+                },
+                options: {
+                    plugin: {
+                        legend: {
+                            labels: {
+                                font: {
+                                    size: 50
+                                }
+                            },
                         },
                     },
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
-            }
-        });
-    </script>
-    <?php include("script.php") ?>
+            });
+        </script>
+        <?php include("script.php") ?>
 </body>
 
 </html>

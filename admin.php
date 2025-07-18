@@ -36,10 +36,10 @@ if (isset($_GET['deleteat_id'])) {
     }
 </style>
 
-<body class="bg-secondary">
+<body class="">
     <!-- Side Bar -->
     <div class="d-flex">
-        <nav class="bg-dark text-light p-3 vh-100" style="width: 280px; position:fixed;">
+        <nav class="bg-primary text-light p-3 vh-100 shadow border-end border-info" style="width: 280px; position:fixed;">
             <a href="admin.php" class="d-flex align-items-center mb-4 text-white text-decoration-none">
                 <svg class="bi me-2" width="40" height="32" aria-hidden="true">
                     <use xlink:href="#bootstrap"></use>
@@ -63,22 +63,22 @@ if (isset($_GET['deleteat_id'])) {
                 <div class="mb-2" id="dateWrapper" style="display: none;">
                     <input type="date" name="search_input_date" class="form-control">
                 </div>
-                <input type="submit" name="search" class="btn btn-success w-100" value="Search">
+                <input type="submit" name="search" class="btn btn-success w-100 shadow rounded" value="Search">
             </form>
             <hr>
-            <button type="button" class="btn btn-warning w-100 mb-2 " data-bs-toggle="modal" data-bs-target="#CreateUser">
+            <button type="button" class="btn btn-warning w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateUser">
                 Create User
             </button>
-            <button type="button" class="btn btn-light w-100 mb-2" data-bs-toggle="modal" data-bs-target="#CreateRoom">
+            <button type="button" class="btn btn-light w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateRoom">
                 Create Room
             </button>
 
-            <a href="chart.php" class="btn btn-primary w-100 mb-2">Chart</a>
+            <a href="chart.php" class="btn btn-dark w-100 mb-2 shadow rounded">Chart</a>
 
-            <button type="button" class="btn btn-danger w-100 mb-2" data-bs-toggle="modal" data-bs-target="#Logout">
+            <button type="button" class="btn btn-danger w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout">
                 Logout
             </button>
-            
+
             <!-- <button class="btn btn=danger w-100" onclick="logoutconfirm()">Logout</button>
             <script>
                 function logoutconfirm() {
@@ -88,25 +88,29 @@ if (isset($_GET['deleteat_id'])) {
                 }
             </script>
 
-             <a href="admin.php?logout='1'" 
+            <a href="admin.php?logout='1'" 
             class="btn btn-danger w-100"
             onclick="return confirm('คุณต้องการจะออกจากระบบใช่หรือไม่')"
             >
             Logout</a> -->
         </nav>
-       
 
 
 
-        <?php include('./modal-create-user.php')?>
-        <?php include('./modal-create-room.php')?>
-        <?php include('./modal-logout.php')?>
+
+        <?php include('./modal-create-user.php') ?>
+        <?php include('./modal-create-room.php') ?>
+        <?php include('./modal-logout.php') ?>
 
         <div class="flex-grow-1 p-4" style="margin-left: 280px;">
 
-            <span class="text-light fs-3"><b>ประวัติการรายงาน</b></span>
+            <span class="text-primary fs-3">
+                <h1><b>ประวัติการรายงาน</b></h1>
+            
+                <h5 class="text-secondary">ตรวจสอบรายงาน</h5>
+            </span>
             <table class="table table-striped table-bordered table-hover text-light" id="myTable">
-                <thead>
+                <thead class="shadow p-3 mb-5 bg-body-tertiary rounded">
                     <tr>
                         <th>Fiscal Year</th>
                         <th>Date (D/M/Y)</th>
@@ -119,7 +123,7 @@ if (isset($_GET['deleteat_id'])) {
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody class="shadow p-3 mb-5 bg-body-tertiary rounded">
 
                     <?php
                     $select_stmt = null;
@@ -153,7 +157,7 @@ if (isset($_GET['deleteat_id'])) {
                             <td class="text-center"><?php echo $row["number"] ?></td>
                             <td data-order="<?php echo $row["report_date"]; ?>">
                                 <?php echo $thai_time ?></td>
-                            
+
                             <td><?php echo $row["reporter_fullname"] ?></td>
                             <td><?php echo $row["position"] ?></td>
                             <td><?php echo $row["room"] ?></td>
@@ -188,8 +192,8 @@ if (isset($_GET['deleteat_id'])) {
                                 ?>
                                 <span class="<?php echo $badge_status; ?>"><?php echo $status_text ?></span>
                             </td>
-                            <td><a href="inspect.php?check_id=<?php echo $row["id"]; ?>" class="btn btn-success">Check</a></td>
-                            <td><a href="admin-delete.php?delete_id=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('คุณต้องการจะลบข้อมูลนี้ใช่หรือไม่?')">Delete</a></td>
+                            <td><a href="inspect.php?check_id=<?php echo $row["id"]; ?>" class="btn btn-outline-success">Check</a></td>
+                            <td><a href="admin-delete.php?delete_id=<?php echo $row['id']; ?>" class="btn btn-outline-danger" onclick="return confirm('คุณต้องการจะลบข้อมูลนี้ใช่หรือไม่?')">Delete</a></td>
                         </tr>
                     <?php
                     }
@@ -199,7 +203,6 @@ if (isset($_GET['deleteat_id'])) {
         </div>
         <?php include("script.php") ?>
         <script>
-
             // searchCategory
             const category = document.getElementById("searchCategory");
             const textInput = document.getElementById("textWrapper");
