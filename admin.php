@@ -152,9 +152,10 @@ if (isset($_GET['deleteat_id'])) {
                         $original_date = $row['report_date'];
                         $timestamp = strtotime($original_date);
                         $thai_time = date("d/m/", $timestamp) . (date("Y", $timestamp) + 543);
+                        
                     ?>
                         <tr>
-                            <td class="text-center"><?php echo $row["number"] ?></td>
+                            <td class="text-center"><?php echo $row["number"] . '/' . $row["fiscal_year"] ?></td>
                             <td data-order="<?php echo $row["report_date"]; ?>">
                                 <?php echo $thai_time ?></td>
 

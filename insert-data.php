@@ -164,7 +164,7 @@ if (isset($_REQUEST['btn_report'])) {
                     $count_stmt->execute();
                     $count = $count_stmt->fetchColumn();
                     $next_number = $count + 1;
-                    $number = "{$next_number}/{$fiscal_year}";
+                    // $number = "{$next_number}/{$fiscal_year}";
 
                     // $img_file = (isset($_POST['img_file']) ? $_POST['img_file'] : '');
 
@@ -211,7 +211,7 @@ if (isset($_REQUEST['btn_report'])) {
                     ':detail' => $detail,
                     ':image_name' => $newname,
                     ':fiscal_year' => $fiscal_year,
-                    ':number' => $number,
+                    ':number' => $next_number,
 
                 );
                 if ($insert_stmt->execute($params)) {

@@ -192,7 +192,7 @@ if (isset($_GET['check_id'])) {
                             </div>
                             <div class="row mx-1 ">
                                 <div class="col bg-white border border-black  me-3 my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $thai_time ?></div>
-                                <div class="col bg-white border border-black   my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $number ?></div>
+                                <div class="col bg-white border border-black   my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $number . "/" . $fiscal_year?></div>
                             </div>
 
                             <div class="text-black text-start fs-5"><b>ห้องที่รายงาน :</b></div>
