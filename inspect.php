@@ -40,7 +40,7 @@ if (isset($_GET['check_id'])) {
 </head>
 
 <style>
-    .status{
+    .status {
         background-color: #093FB4;
         padding: 15px;
         border-radius: 1rem;
@@ -160,9 +160,9 @@ if (isset($_GET['check_id'])) {
                 <div class="col d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                     <div class="h2 text-primary">
                         <b>Inspect</b>
-                        
+
                     </div>
-                    
+
                     <svg
                         class="bi me-2" width="40" height="32" aria-hidden="true">
                         <use xlink:href="#bootstrap"></use>
@@ -198,6 +198,14 @@ if (isset($_GET['check_id'])) {
                             <div class="text-black text-start fs-5"><b>ห้องที่รายงาน :</b></div>
                             <div class="bg-white border border-black   my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $room ?></div>
 
+                            <div class="row ms-2 me-3">
+                                <div class="text-black fs-5"><b>รายละเอียด :</b></div>
+                                <!--<div class="bg-white border border-black ps-1 fs-5 "><?php //echo $detail 
+                                                                                            ?></div>-->
+                                <textarea readonly class="fs-5 w-100 shadow bg-body-tertiary rounded" rows="4"><?php echo htmlspecialchars($detail) ?></textarea>
+
+                            </div>
+
                         </div>
                         <!--RRRRR-->
                         <!-- <div class="col ps-2 my-1 ">
@@ -218,18 +226,11 @@ if (isset($_GET['check_id'])) {
                     <div class="bg-warning text-white text-start mb-2 rounded-3">
                         <h1 class="ms-3 mt-4"> Picture : </h1>
                     </div>
-                    <img src="<?php echo $newname; ?>" class=" img-thumbnail shadow bg-body-tertiary rounded mx-auto d-block " style="width:100%; object-fit:cover;" alt="...">
+                    <img src="<?php echo $newname; ?>" class=" img-thumbnail shadow bg-body-tertiary rounded mx-auto d-block m-4" style="width:100%; object-fit:cover;" alt="...">
                 </div>
                 <hr>
 
-                <div class="row ms-2 me-3">
-                    <div class="text-black fs-5"><b>รายละเอียด :</b></div>
-                    <!--<div class="bg-white border border-black ps-1 fs-5 "><?php //echo $detail 
-                                                                                ?></div>-->
-                    <textarea readonly class="fs-5 w-100 shadow bg-body-tertiary rounded" rows="4"><?php echo htmlspecialchars($detail) ?></textarea>
-
-                </div>
-
+                
 
             </div>
 

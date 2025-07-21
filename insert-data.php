@@ -1,6 +1,31 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 require_once('connection.php');
+
+function fix_orientation($img,$tmp_file){
+    if(function_exists('exif_read_data')){
+        $exif =@exif_read_data($tmp_file);
+        if  ($exif && isset($exif['Orientation'])) {
+            $orientation = $exif ['Orientation'];
+            switch($orientation ) {
+                case 3 :
+                    $img = imagerotate($img, 180, 0);
+                    break;
+                case 6 :
+                    $img = imagerotate($img, -90, 0);
+                    break;
+                case 8 : 
+                    $img = imagerotate($img, 90, 0);
+                    break;
+                
+            }
+        }
+    }
+    return $img;
+}
 
 
 function resize_image($tmp_file, $dest_file, $max_resolution)
@@ -12,6 +37,7 @@ function resize_image($tmp_file, $dest_file, $max_resolution)
 
     if ($mime == 'image/jpeg') {
         $original_image = imagecreatefromjpeg($tmp_file);
+        $original_image = fix_orientation($original_image,$tmp_file);
     } else if ($mime == 'image/png') {
         $original_image = imagecreatefrompng($tmp_file);
     } else {

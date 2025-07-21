@@ -108,7 +108,7 @@ try {
                                 <label for="room" class="form-label">ห้อง</label>
                                 <select name="room" id="room" class="form-select" required>
                                     <option value="">--กรุณาระบุห้อง--</option>
-                                    <option value="อื่นๆ">อื่นๆ</option>
+                                    
                                     <?php foreach ($room as $room): ?>
                                         <option value="<?= htmlspecialchars($room['room_name']) ?>">
                                             <?= htmlspecialchars($room['room_name']) ?>
