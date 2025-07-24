@@ -13,7 +13,7 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="" class="form-label">Room Name :</label>
-                                    <input type="text" class="form-control" name="room_name" id="editRoomName" required>
+                                    <input type="text" class="form-control" name="room_name" id="editRoomName">
 
                                 </div>
                                 

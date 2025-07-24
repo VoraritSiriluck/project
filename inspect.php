@@ -152,7 +152,7 @@ if (isset($_GET['check_id'])) {
         <?php include('./modal-create-room.php') ?>
         <?php include('./modal-logout.php') ?>
 
-        <div class="container bg-light px-5 pb-3" style="height:100%; margin-left:280px;">
+        <div class="flex-grow-1 p-4 bg-light px-5 pb-3 " style="height:100%; margin-left:280px;">
             <header class="row d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
                 <div class="col d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                     <div class="h2 text-primary">
@@ -189,7 +189,7 @@ if (isset($_GET['check_id'])) {
                             </div>
                             <div class="row mx-1 ">
                                 <div class="col bg-white border border-black  me-3 my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $thai_time ?></div>
-                                <div class="col bg-white border border-black   my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $number . "/" . $fiscal_year?></div>
+                                <div class="col bg-white border border-black   my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $number . "/" . $fiscal_year ?></div>
                             </div>
 
                             <div class="text-black text-start fs-5"><b>ห้องที่รายงาน :</b></div>
@@ -227,7 +227,7 @@ if (isset($_GET['check_id'])) {
                 </div>
                 <hr>
 
-                
+
 
             </div>
 
@@ -235,6 +235,7 @@ if (isset($_GET['check_id'])) {
 
 
         </div>
+    </div>
         <?php include("script.php") ?>
 
 

@@ -94,7 +94,7 @@ if (isset($_POST['date_search'])) {
         <?php include('./modal-create-room.php') ?>
         <?php include('./modal-logout.php') ?>
 
-        <div class="container bg-light rounded-3" style="margin-left:280px;">
+        <div class="flex-grow-1 p-4 bg-light rounded-3" style="margin-left:280px;">
 
             <header class="d-flex flex-warp justify-content-center py-3 mb-4 border-bottom ">
                 <a href=""

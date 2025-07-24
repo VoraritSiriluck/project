@@ -68,32 +68,30 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 </div>
 
 
-                <h5 class="text-secondary">แก้ไขชื่อ หรือลบผู้ใช้งาน</h5>
+                <h5 class="text-secondary">เพิ่ม แก้ไขและลบข้อมูล ผู้เข้าใช้งานและห้อง</h5>
 
             </span>
             <div class="table-responsive" id="wrapperUser">
-                
-                    <h2>User</h2>
 
-                    <?php
-                    if (isset($_GET['messageUP'])) {
-                        $UpdateUserMsg = $_GET['messageUP']
-                    ?>
-                        <div class="alert alert-success w-50">
-                            <strong><?php echo htmlspecialchars($UpdateUserMsg) ?></strong>
-                        </div>
-                    <?php } ?>
-                
-                        <?php
-                    if (isset($_GET['messageER'])) {
-                        $UpdateUserMsg = $_GET['messageER']
-                    ?>
-                        <div class="alert alert-danger w-50">
-                            <strong><?php echo htmlspecialchars($UpdateUserMsg) ?></strong>
-                        </div>
-                    <?php } ?>
+                <h2>User</h2>
 
+                <?php
+                if (isset($_GET['messageUP'])) {
+                    $UpdateUserMsg = $_GET['messageUP']
+                ?>
+                    <div class="alert alert-success w-50">
+                        <strong><?php echo htmlspecialchars($UpdateUserMsg) ?></strong>
+                    </div>
+                <?php } ?>
 
+                <?php
+                if (isset($_GET['messageER'])) {
+                    $UpdateUserMsg = $_GET['messageER']
+                ?>
+                    <div class="alert alert-danger w-50">
+                        <strong><?php echo htmlspecialchars($UpdateUserMsg) ?></strong>
+                    </div>
+                <?php } ?>
 
                 <table class="table table-striped table-bordered table-hover text-light w-100" id="tableUser">
                     <thead class="shadow p-3 mb-5 bg-body-tertiary rounded">
@@ -105,22 +103,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <th>Delete</th>
                         </tr>
                     </thead>
-
                     <tbody class="shadow p-3 mb-5 bg-body-tertiary rounded">
-
                         <?php
                         $sqlU = "SELECT * FROM user ";
                         $select_stmt = $db->prepare($sqlU);
                         $select_stmt->execute();
                         $count = 1;
-
                         while ($row = $select_stmt->fetch(PDO::FETCH_ASSOC)) {
-
                         ?>
                             <tr>
                                 <td><?php echo $count++; ?></td>
                                 <td><?php echo $row["username"] ?></td>
-
                                 <td>********</td>
                                 <td><button type="button"
                                         class="btn btn-outline-warning mb-2 shadow rounded open-EditUserModal"
@@ -143,23 +136,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="table-responsive " id="wrapperRoom">
                 <h2>Room</h2>
                 <?php
-                    if (isset($_GET['messageUP'])) {
-                        $UpdateRoomMsg = $_GET['messageUP']
-                    ?>
-                        <div class="alert alert-success w-50">
-                            <strong><?php echo htmlspecialchars($UpdateRoomMsg) ?></strong>
-                        </div>
-                    <?php } ?>
+                if (isset($_GET['messageUP'])) {
+                    $UpdateRoomMsg = $_GET['messageUP']
+                ?>
+                    <div class="alert alert-success w-50">
+                        <strong><?php echo htmlspecialchars($UpdateRoomMsg) ?></strong>
+                    </div>
+                <?php } ?>
 
-                    <?php
-                    if (isset($_GET['messageER'])) {
-                        $UpdateRoomMsg = $_GET['messageER']
-                    ?>
-                        <div class="alert alert-danger w-50">
-                            <strong><?php echo htmlspecialchars($UpdateRoomMsg) ?></strong>
-                        </div>
-                    <?php } ?>
-                    
+                <?php
+                if (isset($_GET['messageER'])) {
+                    $UpdateRoomMsg = $_GET['messageER']
+                ?>
+                    <div class="alert alert-danger w-50">
+                        <strong><?php echo htmlspecialchars($UpdateRoomMsg) ?></strong>
+                    </div>
+                <?php } ?>
+
                 <table class="table table-striped table-bordered table-hover text-dark w-100" id="tableRoom">
                     <thead class="shadow p-3 mb-5 bg-body-tertiary rounded">
                         <tr>
@@ -177,7 +170,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         $sqlR = "SELECT * FROM room ";
                         $select_stmt = $db->prepare($sqlR);
                         $select_stmt->execute();
-                        
+
                         $count = 1;
 
                         while ($row = $select_stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -331,11 +324,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                 // const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
                 // modal.show();
-
-
-
-
-
             }
 
 

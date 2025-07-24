@@ -10,7 +10,7 @@ if (isset($_REQUEST["delete_id"])) {
     //
     if ($delete_stmt->execute()) {
         // $Delete = "";
-        header('Location: manage.php?message=' . urlencode('Delete Report Success'));
+        header('Location: admin.php?messageUP=' . urlencode('Delete Report Success'));
         die();
     }
     //
@@ -24,7 +24,7 @@ if (isset($_REQUEST["deleteuser_id"])) {
     $delete_stmt->bindParam(":id", $id);
     //
     if ($delete_stmt->execute()) {
-        header('Location: manage.php?message=' . urlencode('Delete User Success'));
+        header('Location: manage.php?messageUP=' . urlencode('Delete User Success'));
         die();
     }
     //
@@ -38,7 +38,7 @@ if (isset($_REQUEST["deleteroom_id"])) {
     $delete_stmt->bindParam(":id", $id);
     //
     if ($delete_stmt->execute()) {
-        header('Location: manage.php?message=' . urlencode('Delete Room Success'));
+        header('Location: manage.php?messageUP=' . urlencode('Delete Room Success'));
         die();
     }
     //
