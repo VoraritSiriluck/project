@@ -1,6 +1,11 @@
 <?php
 require_once('connection.php');
 
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("location: login.php");
+    exit;
+}
 
 if (isset($_GET['check_id'])) {
 
@@ -55,21 +60,13 @@ if (isset($_GET['check_id'])) {
                 <svg class="bi me-2" width="40" height="32" aria-hidden="true">
                     <use xlink:href="#bootstrap"></use>
                 </svg>
-                <span class="fs-4"><b>Check </b></span>
+                <span class="fs-4"><b>แบบฟอร์มคำร้องขอทำความสะอาดพื้นที่ </b></span>
             </a>
 
 
             <hr>
 
-            <button type="button" class="btn btn-warning w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateUser">
-                Create User
-            </button>
-            <button type="button" class="btn btn-light w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateRoom">
-                Create Room
-            </button>
-
-
-
+            <a href="manage.php" class="btn btn-warning w-100 mb-2 shadow rounded">Manage User & Room</a>
             <a href="chart.php" class="btn btn-dark w-100 mb-2 shadow rounded">Chart</a>
             <button type="button" class="btn btn-danger w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout">
                 Logout

@@ -66,13 +66,14 @@ if (isset($_GET['deleteat_id'])) {
                 <input type="submit" name="search" class="btn btn-success w-100 shadow rounded" value="Search">
             </form>
             <hr>
-            <button type="button" class="btn btn-warning w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateUser">
+            <!-- <button type="button" class="btn btn-warning w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateUser">
                 Create User
             </button>
             <button type="button" class="btn btn-light w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateRoom">
                 Create Room
-            </button>
+            </button> -->
 
+            <a href="manage.php" class="btn btn-warning w-100 mb-2 shadow rounded">Manage User & Room</a>
             <a href="chart.php" class="btn btn-dark w-100 mb-2 shadow rounded">Chart</a>
 
             <button type="button" class="btn btn-danger w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout">
@@ -106,7 +107,7 @@ if (isset($_GET['deleteat_id'])) {
 
             <span class="text-primary fs-3">
                 <h1><b>ประวัติการรายงาน</b></h1>
-            
+
                 <h5 class="text-secondary">ตรวจสอบรายงาน</h5>
             </span>
             <table class="table table-striped table-bordered table-hover text-light" id="myTable">
@@ -152,7 +153,7 @@ if (isset($_GET['deleteat_id'])) {
                         $original_date = $row['report_date'];
                         $timestamp = strtotime($original_date);
                         $thai_time = date("d/m/", $timestamp) . (date("Y", $timestamp) + 543);
-                        
+
                     ?>
                         <tr>
                             <td class="text-center"><?php echo $row["number"] . '/' . $row["fiscal_year"] ?></td>
@@ -248,9 +249,6 @@ if (isset($_GET['deleteat_id'])) {
 
                 // const status = urlParam.get('status');
                 // const message = urlParam.get('message');
-
-
-
                 // if (message && status && document.getElementById('CreateUser')){
                 //     new bootstrap.Modal(document.getElementById('CreateUser')).show();
                 // }

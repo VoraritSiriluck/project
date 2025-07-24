@@ -2,6 +2,12 @@
 
 require_once('connection.php');
 
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("location: login.php");
+    exit;
+}
+
 if (isset($_POST['date_search'])) {
     $date_start = $_POST['date_start'];
     $date_end = $_POST['date_end'];
@@ -53,7 +59,8 @@ if (isset($_POST['date_search'])) {
 </head>
 <style>
     .backchart {
-        width: 1200px;
+        /* width: 1200px; */
+        width: flex;
         padding-bottom: 36px;
 
     }
@@ -64,7 +71,7 @@ if (isset($_POST['date_search'])) {
     }
 </style>
 
-<body class="bg-primary">
+<body class="bg-light">
     <!-- Side Bar -->
     <div class="d-flex">
 
@@ -73,16 +80,10 @@ if (isset($_POST['date_search'])) {
                 <svg class="bi me-2" width="40" height="32" aria-hidden="true">
                     <use xlink:href="#bootstrap"></use>
                 </svg>
-                <span class="fs-4"><b>Chart </b></span>
+                <span class="fs-4"><b>แบบฟอร์มคำร้องขอทำความสะอาดพื้นที่ </b></span>
             </a>
             <hr>
-            <button type="button" class="btn btn-warning w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateUser">
-                Create User
-            </button>
-
-            <button type="button" class="btn btn-light w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateRoom">
-                Create Room
-            </button>
+            <a href="manage.php" class="btn btn-warning w-100 mb-2 shadow rounded">Manage User & Room</a>
             <a href="chart.php" class="btn btn-dark w-100 mb-2 shadow rounded">Chart</a>
             <!-- <a href="admin.php?logout='1'" class="btn btn-danger w-100">Logout</a> -->
             <button type="button" class="btn btn-danger w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout">
@@ -118,7 +119,7 @@ if (isset($_POST['date_search'])) {
                     
                     <a href="admin.php" class="col-md-1 me-2 mt-3 align-item-end btn btn-primary shadow rounded">
                         <b>Back</b></a>
-                </a>
+                    </a>
                 
                 
                 
