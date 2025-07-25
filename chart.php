@@ -83,11 +83,11 @@ if (isset($_POST['date_search'])) {
                 <span class="fs-4"><b>แบบฟอร์มคำร้องขอทำความสะอาดพื้นที่ </b></span>
             </a>
             <hr>
-            <a href="manage.php" class="btn btn-warning w-100 mb-2 shadow rounded">Manage User & Room</a>
-            <a href="chart.php" class="btn btn-dark w-100 mb-2 shadow rounded">Chart</a>
-            <!-- <a href="admin.php?logout='1'" class="btn btn-danger w-100">Logout</a> -->
-            <button type="button" class="btn btn-danger w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout">
-                Logout
+            <a href="admin.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"><i class="fa-solid fa-house"></i><b> Dash Board</b></a>
+            <a href="manage.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"><i class="fa-solid fa-wrench"></i><b> Manage User & Room</b></a>
+            <a href="index.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"> <b><i class="fa-solid fa-file-invoice"></i> Back to Form</b></a>
+            <button type="button" class="btn btn-outline-danger w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout">
+                <i class="fa-solid fa-right-from-bracket"></i><b> Logout</b>
             </button>
         </nav>
         <?php include('./modal-create-user.php') ?>

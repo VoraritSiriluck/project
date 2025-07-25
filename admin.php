@@ -54,7 +54,7 @@ if (isset($_GET['deleteat_id'])) {
                         <option value="report_date">ค้นหาตามวันที่</option>
                         <option value="reporter_name">ค้นหาตามชื่อ</option>
                         <option value="position">ค้นหาตามตำแหน่ง</option>
-                        <option value="room">ค้นหาตามห้อง</option>
+                        <option value="roomsearch">ค้นหาตามห้อง</option>
                     </select>
                 </div>
                 <div class="mb-2" id="textWrapper" style="display: none;">
@@ -63,7 +63,22 @@ if (isset($_GET['deleteat_id'])) {
                 <div class="mb-2" id="dateWrapper" style="display: none;">
                     <input type="date" name="search_input_date" class="form-control">
                 </div>
-                <input type="submit" name="search" class="btn btn-success w-100 shadow rounded" value="Search">
+                <div class="mb-2" id="roomWrapper" style="display: none;">
+                    <select name="search_input_room" class="form-select">
+                        <option value="">--เลือกห้อง</option>
+                        <?php 
+                        $stmt = $db->prepare("SELECT * FROM room ORDER BY room_name ASC");
+                        $stmt->execute();
+                        while($room = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            echo '<option value="' . htmlspecialchars($room['id']) .'">' . htmlspecialchars($room['room_name']) . '</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+                    
+                <button type="submit" name="search" class="btn btn-success w-100 shadow rounded">
+                        <i class="fa-solid fa-magnifying-glass"></i><b> Search</b>
+                </button>
             </form>
             <hr>
             <!-- <button type="button" class="btn btn-warning w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateUser">
@@ -73,11 +88,11 @@ if (isset($_GET['deleteat_id'])) {
                 Create Room
             </button> -->
 
-            <a href="manage.php" class="btn btn-warning w-100 mb-2 shadow rounded">Manage User & Room</a>
-            <a href="chart.php" class="btn btn-dark w-100 mb-2 shadow rounded">Chart</a>
-
-            <button type="button" class="btn btn-danger w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout">
-                Logout
+            <a href="manage.php" class="btn btn-outline-light w-100 mb-2 shadow rounded" ><b><i class="fa-solid fa-wrench"></i> Manage User & Room</b></a>
+            <a href="chart.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"><b><i class="fa-solid fa-chart-line"></i> Chart</b></a>
+            <a href="index.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"> <b><i class="fa-solid fa-file-invoice"></i> Back to Form</b></a>
+            <button type="button" class="btn btn-outline-danger   w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout" style="color:white;">
+                <i class="fa-solid fa-right-from-bracket"></i> <b>Logout</b>
             </button>
 
             <!-- <button class="btn btn=danger w-100" onclick="logoutconfirm()">Logout</button>
@@ -119,8 +134,8 @@ if (isset($_GET['deleteat_id'])) {
                         <th>Department</th>
                         <th>Room</th>
                         <th>Status</th>
-                        <th>Check</th>
-                        <th>Delete</th>
+                        <th>Detail</th>
+
                     </tr>
                 </thead>
 
@@ -137,6 +152,11 @@ if (isset($_GET['deleteat_id'])) {
                             $sql = "SELECT * FROM clean_report WHERE report_date = :value ORDER BY report_date DESC";
                             $select_stmt = $db->prepare($sql);
                             $select_stmt->bindParam(':value', $value);
+                        } else if($category == 'roomsearch'){
+                            $value = $_POST['search_input_room'];
+                            $sql = "SELECT * FROM clean_report WHERE room = :value ORDER BY report_date DESC";
+                            $select_stmt = $db->prepare($sql);
+                            $select_stmt->bindParam(':value',$value);
                         } else {
                             $value = "%" . $_POST['search_input_text'] . "%";
                             $sql = "SELECT * FROM clean_report WHERE $category LIKE :value ORDER BY report_date DESC";
@@ -194,8 +214,7 @@ if (isset($_GET['deleteat_id'])) {
                                 ?>
                                 <span class="<?php echo $badge_status; ?>"><?php echo $status_text ?></span>
                             </td>
-                            <td><a href="inspect.php?check_id=<?php echo $row["id"]; ?>" class="btn btn-outline-success">Check</a></td>
-                            <td><a href="admin-delete.php?delete_id=<?php echo $row['id']; ?>" class="btn btn-outline-danger" onclick="return confirm('คุณต้องการจะลบข้อมูลนี้ใช่หรือไม่?')">Delete</a></td>
+                            <td><a href="inspect.php?check_id=<?php echo $row["id"]; ?>" class="btn btn-outline-success"><i class="fa-solid fa-eye"></i></a></td>
                         </tr>
                     <?php
                     }
@@ -209,15 +228,22 @@ if (isset($_GET['deleteat_id'])) {
             const category = document.getElementById("searchCategory");
             const textInput = document.getElementById("textWrapper");
             const dateInput = document.getElementById("dateWrapper");
+            const roomInput = document.getElementById("roomWrapper");
             // serach select
             category.addEventListener('change', function() {
                 const value = this.value;
                 if (value === 'report_date') {
                     dateInput.style.display = 'block';
                     textInput.style.display = 'none';
+                    roomInput.style.display = 'none';
+                }else if(value === 'roomsearch'){
+                    dateInput.style.display = 'none';
+                    textInput.style.display = 'none';
+                    roomInput.style.display = 'block';
                 } else {
                     dateInput.style.display = 'none';
                     textInput.style.display = 'block';
+                    roomInput.style.display = 'none';
                 }
             });
 

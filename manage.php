@@ -33,22 +33,24 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
             <div class="btn-group bg-light w-100 mb-2 shadow rounded" role="group" aria-label="Basic radio toggle button group">
                 <input type="radio" class="btn-check" name="btnradio" id="btnradioUser" autocomplete="off" checked>
-                <label class="btn btn-outline-success" for="btnradioUser">User</label>
+                <label class="btn btn-outline-success" for="btnradioUser"><i class="fa-solid fa-users"></i> <b> User</b></label>
 
                 <input type="radio" class="btn-check" name="btnradio" id="btnradioRoom" autocomplete="off">
-                <label class="btn btn-outline-success" for="btnradioRoom">Room</label>
+                <label class="btn btn-outline-success" for="btnradioRoom"><i class="fa-solid fa-tents"></i> <b> Room</b></label>
 
             </div>
-            <button type="button" class="btn btn-warning w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateUser">
-                Create User
+            <a href="admin.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"><b><i class="fa-solid fa-house"></i> Dash Board</b></a>
+            <button type="button" class="btn btn-outline-light w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateUser">
+                <b><i class="fa-solid fa-user-plus"></i> Create User</b>
             </button>
-            <button type="button" class="btn btn-light w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateRoom">
-                Create Room
+            <button type="button" class="btn btn-outline-light w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateRoom">
+                <b><i class="fa-solid fa-house-medical"></i> Create Room</b>
             </button>
-            <a href="chart.php" class="btn btn-dark w-100 mb-2 shadow rounded">Chart</a>
-
-            <button type="button" class="btn btn-danger w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout">
-                Logout
+            
+            <a href="chart.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"><b><i class="fa-solid fa-chart-line"></i> Chart</b></a>
+            <a href="index.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"> <b><i class="fa-solid fa-file-invoice"></i> Back to Form</b></a>
+            <button type="button" class="btn btn-outline-danger w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout">
+                <b><i class="fa-solid fa-right-from-bracket"></i> Logout</b>
             </button>
 
         </nav>
@@ -121,9 +123,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                         data-bs-target="#EditUser"
                                         data-user-id="<?php echo $row['id']; ?>"
                                         data-username="<?php echo htmlspecialchars($row['username']); ?>">
-                                        Edit
+                                        <i class="fa-solid fa-pen"></i><b> Edit</b>
                                     </button></td>
-                                <td><a href="admin-delete.php?deleteuser_id=<?php echo $row['id']; ?>" class="btn btn-outline-danger" onclick="return confirm('คุณต้องการจะลบข้อมูลนี้ใช่หรือไม่?')">Delete</a></td>
+                                <td><a href="admin-delete.php?deleteuser_id=<?php echo $row['id']; ?>" class="btn btn-outline-danger" onclick="return confirm('คุณต้องการจะลบข้อมูลนี้ใช่หรือไม่?')"><i class="fa-solid fa-trash"></i><b> Delete</b></a></td>
                             </tr>
                         <?php
                         }
@@ -184,9 +186,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                         data-bs-target="#EditRoom"
                                         data-room-id="<?php echo $row['id']; ?>"
                                         data-roomname="<?php echo htmlspecialchars($row['room_name']); ?>">
-                                        Edit
+                                        <i class="fa-solid fa-pen"></i> <b>Edit</b>
                                     </button></td>
-                                <td><a href="admin-delete.php?deleteroom_id=<?php echo $row['id']; ?>" class="btn btn-outline-danger" onclick="return confirm('คุณต้องการจะลบข้อมูลนี้ใช่หรือไม่?')">Delete</a></td>
+                                <td><a href="admin-delete.php?deleteroom_id=<?php echo $row['id']; ?>" class="btn btn-outline-danger" onclick="return confirm('คุณต้องการจะลบข้อมูลนี้ใช่หรือไม่?')"><i class="fa-solid fa-trash"></i><b> Delete</b></a></td>
                             </tr>
                         <?php
                         }

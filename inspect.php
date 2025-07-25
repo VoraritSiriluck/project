@@ -65,11 +65,13 @@ if (isset($_GET['check_id'])) {
 
 
             <hr>
-
-            <a href="manage.php" class="btn btn-warning w-100 mb-2 shadow rounded">Manage User & Room</a>
-            <a href="chart.php" class="btn btn-dark w-100 mb-2 shadow rounded">Chart</a>
-            <button type="button" class="btn btn-danger w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout">
-                Logout
+            <a href="admin.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"><b><i class="fa-solid fa-house"></i> Dash Board</b></a>
+            <a href="manage.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"><b><i class="fa-solid fa-wrench"></i> Manage User & Room</b></a>
+            
+            <a href="chart.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"><b><i class="fa-solid fa-chart-line"></i> Chart</b></a>
+            <a href="index.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"> <b><i class="fa-solid fa-file-invoice"></i> Back to Form</b></a>
+            <button type="button" class="btn btn-outline-danger w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout">
+                <b><i class="fa-solid fa-right-from-bracket"></i> Logout</b>
             </button>
             <!-- <a href="admin.php?logout='1'" class="btn btn-danger w-100">Logout</a> -->
             <!-- <hr>
@@ -156,8 +158,7 @@ if (isset($_GET['check_id'])) {
             <header class="row d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
                 <div class="col d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                     <div class="h2 text-primary">
-                        <b>Inspect</b>
-
+                        <b>รายละเอียด</b>
                     </div>
 
                     <svg
@@ -173,7 +174,7 @@ if (isset($_GET['check_id'])) {
                 <!--LEFT -->
                 <div class="col ">
                     <div class="bg-dark text-white mb-2 rounded-3 ">
-                        <h1 class="ms-3 mt-4">Data : </h1>
+                        <h1 class="ms-3 mt-4 ">Data : <?php echo "( " . $number . "/" . $fiscal_year . " )" ?></h1>
                     </div>
 
                     <div class="row">
@@ -181,17 +182,11 @@ if (isset($_GET['check_id'])) {
                         <div class="col my-1 ">
                             <div class="text-black my-2  text-start fs-5"><b>ชื่อผู้รายงาน : </b></div>
                             <div class="bg-white border border-black   my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $reporter_fullname ?></div>
-                            <div class="text-black my-2 text-start fs-5"><b>ตำแหน่งผู้รายงาน : </b></div>
+                            <div class="text-black my-2 text-start fs-5"><b>ฝ่าย : </b></div>
                             <div class="bg-white border border-black   my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $position ?></div>
-                            <div class="row">
-                                <div class="col text-black text-start fs-5 "><b>วันที่รายงาน(ว/ด/ป) : </b></div>
-                                <div class="col text-black text-start fs-5"><b>ปีงบประมาณ : </b></div>
-                            </div>
-                            <div class="row mx-1 ">
-                                <div class="col bg-white border border-black  me-3 my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $thai_time ?></div>
-                                <div class="col bg-white border border-black   my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $number . "/" . $fiscal_year ?></div>
-                            </div>
 
+                            <div class="col text-black text-start fs-5 "><b>วันที่รายงาน(ว/ด/ป) : </b></div>
+                            <div class="col bg-white border border-black  me-3 my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $thai_time ?></div>
                             <div class="text-black text-start fs-5"><b>ห้องที่รายงาน :</b></div>
                             <div class="bg-white border border-black   my-2 ps-1 fs-5 text-black shadow bg-body-tertiary rounded"><?php echo $room ?></div>
 
@@ -236,7 +231,7 @@ if (isset($_GET['check_id'])) {
 
         </div>
     </div>
-        <?php include("script.php") ?>
+    <?php include("script.php") ?>
 
 
 </body>
