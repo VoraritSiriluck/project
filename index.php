@@ -93,15 +93,15 @@ try {
 
                             <!-- ชื่อ -->
                             <div class="mb-3">
-                                <!-- <label for="name" class="form-label">ชื่อ</label>
+                                <label for="name" class="form-label">ชื่อ</label>
                                 <select name="reporter_name" id="reporter_name" class="form-select">
                                     <option value="">--กรุณาระบุชื่อผู้รายงาน--</option>
 
-                                </select> -->
-                                <input type="text" class="form-control" id="reporter_name" name="reporter_name">
+                                </select>
+                                <!-- <input type="text" class="form-control" id="reporter_name" name="reporter_name"> -->
 
                             </div>
-
+                            
                             <!-- ฝ่าย -->
                             <div class="mb-3">
                                 <label for="department" class="form-label">ฝ่าย</label>
