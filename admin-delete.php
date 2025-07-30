@@ -4,7 +4,20 @@ require_once('connection.php');
 if (isset($_REQUEST["delete_id"])) {
     $id = $_REQUEST['delete_id'];
 
-    
+    $select_stmt = $db->prepare("SELECT image_name FROM clean_report WHERE id = :id");
+    $select_stmt->bindParam(":id",$id);
+    $select_stmt->execute();
+    $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($row) {
+        $file_path = 'upload/' . $row['image'];
+
+        if(file_exists($file_path)){
+            unlink($file_path);
+        }
+    }
+
+
     $delete_stmt = $db->prepare('DELETE FROM clean_report WHERE id= :id');
     $delete_stmt->bindParam(":id", $id);
     //

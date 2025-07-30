@@ -44,8 +44,17 @@ try {
 
 
 <body class="bg-primary bg-opacity-10">
-
+    <div class=" text-end mt-3 me-4">
+        <a class="text-body-secondary icon-link icon-link-hover link-underline-secondary " href="admin.php" style="text-decoration: none;"><b>for admin</b>
+            <svg xmlns="http://www.w3.org/2000/svg" class="bi" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+            </svg>
+        </a>
+        
+        
+    </div>
     <div class="container py-5">
+
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="row g-0 shadow rounded overflow-hidden">
@@ -56,7 +65,12 @@ try {
 
                     <!-- ขวา: ฟอร์ม -->
                     <div class="col-md-6 bg-primary text-white p-4">
-                        <h5 class="mb-4">ฟอร์มแจ้งปัญหา / รายงาน</h5>
+                        
+                            <h3 class="col mb-4">ฟอร์มแจ้งปัญหา / รายงาน</h3>
+                            
+                        
+
+
                         <?php
                         if (isset($errorMsg)) {
                         ?>
@@ -79,11 +93,13 @@ try {
 
                             <!-- ชื่อ -->
                             <div class="mb-3">
-                                <label for="name" class="form-label">ชื่อ</label>
+                                <!-- <label for="name" class="form-label">ชื่อ</label>
                                 <select name="reporter_name" id="reporter_name" class="form-select">
                                     <option value="">--กรุณาระบุชื่อผู้รายงาน--</option>
 
-                                </select>
+                                </select> -->
+                                <input type="text" class="form-control" id="reporter_name" name="reporter_name">
+
                             </div>
 
                             <!-- ฝ่าย -->
@@ -108,7 +124,7 @@ try {
                                 <label for="room" class="form-label">ห้อง</label>
                                 <select name="room" id="room" class="form-select" required>
                                     <option value="">--กรุณาระบุห้อง--</option>
-                                    
+
                                     <?php foreach ($room as $room): ?>
                                         <option value="<?= htmlspecialchars($room['room_name']) ?>">
                                             <?= htmlspecialchars($room['room_name']) ?>
@@ -138,7 +154,7 @@ try {
 
                         </form>
                         <div class=" text-end mt-3">
-                            <a class="text-body-secondary icon-link icon-link-hover link-underline-secondary " href="admin.php" style="text-decoration: none;"><b>for admin</b>
+                            <a class="text-light icon-link icon-link-hover link-underline-secondary " href="history.php" style="text-decoration: none;"><b>History</b>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="bi" viewBox="0 0 16 16" aria-hidden="true">
                                     <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
                                 </svg>

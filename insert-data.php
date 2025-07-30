@@ -140,7 +140,7 @@ if (isset($_REQUEST['btn_report'])) {
         if (empty($other_room)) {
             $errorMsg = 'กรุณาระบุชื่อห้องเพิ่มเติม';
         } else {
-            $room = "อื่น ๆ - $other_room";
+            $room = "อื่นๆ - $other_room";
         }
     }
 

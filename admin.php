@@ -28,6 +28,10 @@ if (isset($_GET['deleteat_id'])) {
     <?php include("head.php") ?>
     <title>Report</title>
 
+    <script>
+
+    </script>
+
 </head>
 
 <style>
@@ -40,11 +44,12 @@ if (isset($_GET['deleteat_id'])) {
     <!-- Side Bar -->
     <div class="d-flex">
         <nav class="bg-primary text-light p-3 vh-100 shadow border-end border-info" style="width: 280px; position:fixed;">
-            <a href="admin.php" class="d-flex align-items-center mb-4 text-white text-decoration-none">
+            <a href="admin.php" class="d-flex align-items-center mb-4 text-white text-decoration-none ">
                 <svg class="bi me-2" width="40" height="32" aria-hidden="true">
                     <use xlink:href="#bootstrap"></use>
                 </svg>
-                <span class="fs-4"><b>แบบฟอร์มคำร้องขอทำความสะอาดพื้นที่</b></span>
+                <span class="fs-4 "><b>แบบฟอร์มคำร้องขอทำความสะอาดพื้นที่</b></span>
+
             </a>
             <hr>
             <form action="" method="POST" id="search" class="mb-4">
@@ -53,7 +58,7 @@ if (isset($_GET['deleteat_id'])) {
                         <option value="">เลือกหมวดหมู่ค้นหา</option>
                         <option value="report_date">ค้นหาตามวันที่</option>
                         <option value="reporter_name">ค้นหาตามชื่อ</option>
-                        <option value="position">ค้นหาตามตำแหน่ง</option>
+                        <option value="position">ค้นหาตามฝ่าย</option>
                         <option value="roomsearch">ค้นหาตามห้อง</option>
                     </select>
                 </div>
@@ -64,21 +69,24 @@ if (isset($_GET['deleteat_id'])) {
                     <input type="date" name="search_input_date" class="form-control">
                 </div>
                 <div class="mb-2" id="roomWrapper" style="display: none;">
+
                     <select name="search_input_room" class="form-select">
                         <option value="">--เลือกห้อง</option>
-                        <?php 
+                        <?php
                         $stmt = $db->prepare("SELECT * FROM room ORDER BY room_name ASC");
                         $stmt->execute();
-                        while($room = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            echo '<option value="' . htmlspecialchars($room['id']) .'">' . htmlspecialchars($room['room_name']) . '</option>';
+                        while ($room = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            echo '<option value="' . htmlspecialchars($room['room_name']) . '">' . htmlspecialchars($room['room_name']) . '</option>';
                         }
                         ?>
                     </select>
                 </div>
-                    
-                <button type="submit" name="search" class="btn btn-success w-100 shadow rounded">
-                        <i class="fa-solid fa-magnifying-glass"></i><b> Search</b>
+                <button type="submit" name="search" class="btn btn-success shadow rounded w-100">
+                    <i class="fa-solid fa-magnifying-glass"></i><b> Search</b>
                 </button>
+
+
+
             </form>
             <hr>
             <!-- <button type="button" class="btn btn-warning w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#CreateUser">
@@ -88,13 +96,26 @@ if (isset($_GET['deleteat_id'])) {
                 Create Room
             </button> -->
 
-            <a href="manage.php" class="btn btn-outline-light w-100 mb-2 shadow rounded" ><b><i class="fa-solid fa-wrench"></i> Manage User & Room</b></a>
+            <a href="manage.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"><b><i class="fa-solid fa-wrench"></i> Manage User & Room</b></a>
             <a href="chart.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"><b><i class="fa-solid fa-chart-line"></i> Chart</b></a>
             <a href="index.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"> <b><i class="fa-solid fa-file-invoice"></i> Back to Form</b></a>
+
+            <div class="row ms-0 w-100 gap-2 ">
+                <button id="exportCopy" class="col btn btn-outline-light w-100 mb-2 shadow rounded">
+                    <b><i class="fa-solid fa-copy"></i> Copy Report</b>
+                </button>
+                <button id="exportExcel" class="col btn btn-outline-light w-100 mb-2 shadow rounded">
+                    <b><i class="fa-solid fa-file-excel"></i> Export to Excel</b>
+                </button>
+
+            </div>
+
+
+
+
             <button type="button" class="btn btn-outline-danger   w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout" style="color:white;">
                 <i class="fa-solid fa-right-from-bracket"></i> <b>Logout</b>
             </button>
-
             <!-- <button class="btn btn=danger w-100" onclick="logoutconfirm()">Logout</button>
             <script>
                 function logoutconfirm() {
@@ -125,6 +146,8 @@ if (isset($_GET['deleteat_id'])) {
 
                 <h5 class="text-secondary">ตรวจสอบรายงาน</h5>
             </span>
+
+
             <table class="table table-striped table-bordered table-hover text-light" id="myTable">
                 <thead class="shadow p-3 mb-5 bg-body-tertiary rounded">
                     <tr>
@@ -134,8 +157,9 @@ if (isset($_GET['deleteat_id'])) {
                         <th>Department</th>
                         <th>Room</th>
                         <th>Status</th>
-                        <th>Detail</th>
-
+                        <th style="display: none;">Detail</th>
+                        <th class="text-center">#</th>
+                        <!-- <th>Delete</th> -->
                     </tr>
                 </thead>
 
@@ -152,11 +176,11 @@ if (isset($_GET['deleteat_id'])) {
                             $sql = "SELECT * FROM clean_report WHERE report_date = :value ORDER BY report_date DESC";
                             $select_stmt = $db->prepare($sql);
                             $select_stmt->bindParam(':value', $value);
-                        } else if($category == 'roomsearch'){
-                            $value = $_POST['search_input_room'];
-                            $sql = "SELECT * FROM clean_report WHERE room = :value ORDER BY report_date DESC";
+                        } else if ($category == 'roomsearch') {
+                            $value = "%" . $_POST['search_input_room'] . "%";
+                            $sql = "SELECT * FROM clean_report WHERE room LIKE :value ORDER BY report_date DESC";
                             $select_stmt = $db->prepare($sql);
-                            $select_stmt->bindParam(':value',$value);
+                            $select_stmt->bindParam(':value', $value);
                         } else {
                             $value = "%" . $_POST['search_input_text'] . "%";
                             $sql = "SELECT * FROM clean_report WHERE $category LIKE :value ORDER BY report_date DESC";
@@ -214,7 +238,10 @@ if (isset($_GET['deleteat_id'])) {
                                 ?>
                                 <span class="<?php echo $badge_status; ?>"><?php echo $status_text ?></span>
                             </td>
+                            <td style="display: none;"><?php echo $row['detail'] ?></td>
                             <td><a href="inspect.php?check_id=<?php echo $row["id"]; ?>" class="btn btn-outline-success"><i class="fa-solid fa-eye"></i></a></td>
+                            <!-- <td><a href="admin-delete.php?delete_id=<?php //echo $row['id']; 
+                                                                            ?>" class="btn btn-outline-danger" onclick="return confirm('คุณต้องการจะลบข้อมูลนี้ใช่หรือไม่?')">Delete</a></td> -->
                         </tr>
                     <?php
                     }
@@ -236,7 +263,7 @@ if (isset($_GET['deleteat_id'])) {
                     dateInput.style.display = 'block';
                     textInput.style.display = 'none';
                     roomInput.style.display = 'none';
-                }else if(value === 'roomsearch'){
+                } else if (value === 'roomsearch') {
                     dateInput.style.display = 'none';
                     textInput.style.display = 'none';
                     roomInput.style.display = 'block';
@@ -249,12 +276,40 @@ if (isset($_GET['deleteat_id'])) {
 
             //เรียกใช้ Datatable  |id table ต้องตรงกับ #
             $(document).ready(function() {
-                $('#myTable').DataTable({
-                    "order": [
-                        [0, "desc"]
+                const table = $('#myTable').DataTable({
+                    // "order": [
+                    //     [0, "desc"]
+                    // ],
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copyHtml5',
+                        'excelHtml5',
+                        'csvHtml5',
+                        'pdfHtml5',
+                        'print'
                     ]
                 });
+
+                $('.dt-buttons').hide();
+
+                $('#exportCopy').on('click', function() {
+                    table.button('.buttons-copy').trigger();
+                });
+
+                $('#exportExcel').on('click', function() {
+                    table.button('.buttons-excel').trigger();
+                });
+
+                $('#exportCSV').on('click', function() {
+                    table.button('.buttons-csv').trigger();
+                });
+
+                $('#exportPDF').on('click', function() {
+                    table.button('.buttons-pdf').trigger();
+                });
             });
+
+
 
             // Modal
             const urlParam = new URLSearchParams(window.location.search);
