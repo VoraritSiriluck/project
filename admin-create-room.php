@@ -1,6 +1,9 @@
 <?php
+
 require('./function.php');
 require_once("connection.php");
+require_once('function-log.php');
+session_start();
 
 if (isset($_REQUEST['btn-createroom'])) {
     $new_room = $_POST['new_room'];
@@ -19,7 +22,11 @@ if (isset($_REQUEST['btn-createroom'])) {
                 $create_room = $db->prepare($Insert_room);
                 $create_room->bindParam(":new_room", $new_room);
                 if ($create_room->execute()) {
+                    $username = $_SESSION['username'];
+                    $message = "เพิ่มห้อง ชื่อ {$new_room}";
+                    active_log($db,$username,$message);
                     redirectMessage('success', 'เพิ่มห้องสำเร็จเสร็จสิ้น', 'room');
+                    
                 } else {
                     redirectMessage('error', 'ไม่สามารถเพิ่มข้อมูลได้', 'room');
                 }

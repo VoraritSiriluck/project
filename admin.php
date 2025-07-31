@@ -1,6 +1,6 @@
 <?php
 require_once('connection.php');
-
+require_once('function-log.php');
 //
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
@@ -9,9 +9,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 
 if (isset($_GET['logout'])) {
+    active_log($db,$_SESSION['username'],"ออกจากระบบ");
     session_destroy();
     unset($_SESSION['username']);
     header('location: login.php');
+    
 }
 
 if (isset($_GET['deleteat_id'])) {
@@ -27,11 +29,6 @@ if (isset($_GET['deleteat_id'])) {
 <head>
     <?php include("head.php") ?>
     <title>Report</title>
-
-    <script>
-
-    </script>
-
 </head>
 
 <style>

@@ -2,8 +2,7 @@
 session_start();
 
 require_once('connection.php');
-
-
+require_once('function-log.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
@@ -20,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $user['username'];
         header("Location: admin.php");
+        active_log($db,$_SESSION['username'],"เข้าสู่ระบบ");
         exit;
     } else {
         $error = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";

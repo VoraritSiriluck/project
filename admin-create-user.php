@@ -1,6 +1,9 @@
 <?php
+
 require('./function.php');
 require_once('connection.php');
+require_once('function-log.php');
+session_start();
 
 if (isset($_REQUEST['btn-createuser'])) {
     $new_username = trim($_POST['new_username']);
@@ -28,6 +31,9 @@ if (isset($_REQUEST['btn-createuser'])) {
                 $create_stmt->bindParam(':new_password', $hashed_password);
 
                 if ($create_stmt->execute()) {
+                    $username = $_SESSION['username'];
+                    $message = "เพิ่ม username ชื่อ {$new_username}";
+                    active_log($db,$username,$message);
                     redirectMessage('success', 'สร้างผู้ใช้สำเร็จแล้ว');
                 } else {
                     redirectMessage('error', 'ไม่สามารถเพิ่มข้อมูลได้');

@@ -1,5 +1,6 @@
 <?php
 require_once('connection.php');
+require_once('function-log.php');
 
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
