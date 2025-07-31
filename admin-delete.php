@@ -46,7 +46,7 @@ if (isset($_REQUEST["deleteuser_id"])) {
         $delete_stmt = $db->prepare('DELETE FROM user WHERE id = :id');
         $delete_stmt->bindParam(":id", $id);
         if ($delete_stmt->execute()) {
-            $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'unknow';
+            $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'unknown';
             $message = "ลบ username ชื่อ {$delete_username}";
             active_log($db, $username, $message);
             header('Location: manage.php?messageUP=' . urlencode('Delete User Success'));
@@ -70,7 +70,7 @@ if (isset($_REQUEST["deleteroom_id"])) {
         $delete_stmt = $db->prepare('DELETE FROM room WHERE id= :id');
         $delete_stmt->bindParam(":id", $id);
         if ($delete_stmt->execute()) {
-            $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'unknow';
+            $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'unknown';
             $message = "ลบห้อง ชื่อ {$delete_room}";
             active_log($db, $username, $message);
             header('Location: manage.php?messageUP=' . urlencode('Delete Room Success'));
