@@ -11,7 +11,7 @@
  Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 31/07/2025 13:20:33
+ Date: 01/08/2025 16:10:25
 */
 
 SET NAMES utf8mb4;
@@ -31,6 +31,13 @@ CREATE TABLE `activity_log`  (
 -- ----------------------------
 -- Records of activity_log
 -- ----------------------------
+INSERT INTO `activity_log` VALUES ('2025-07-31 15:36:57', 'admin', 'แก้ไขสถานะ report ID 1 เป็น in_progress');
+INSERT INTO `activity_log` VALUES ('2025-08-01 08:52:36', 'admin', 'เข้าสู่ระบบ');
+INSERT INTO `activity_log` VALUES ('2025-08-01 09:31:36', 'admin', 'แก้ไขสถานะ report ID 1 เป็น cancel');
+INSERT INTO `activity_log` VALUES ('2025-08-01 09:49:04', 'admin', 'ออกจากระบบ');
+INSERT INTO `activity_log` VALUES ('2025-08-01 10:37:00', 'admin', 'เข้าสู่ระบบ');
+INSERT INTO `activity_log` VALUES ('2025-08-01 11:16:56', 'admin', 'แก้ไขสถานะ report ID 2 เป็น in_progress');
+INSERT INTO `activity_log` VALUES ('2025-08-01 11:19:17', 'admin', 'แก้ไขสถานะ report ID 2 เป็น done');
 
 -- ----------------------------
 -- Table structure for clean_report
@@ -47,6 +54,8 @@ CREATE TABLE `clean_report`  (
   `detail` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `image_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `status` enum('waiting','in_progress','done','cancel') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `last_user_edit` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `last_time_edit` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `cancel_reason` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `fiscal_year` tinyint NOT NULL,
   `number` varchar(6) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
