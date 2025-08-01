@@ -9,11 +9,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 
 if (isset($_GET['logout'])) {
-    active_log($db,$_SESSION['username'],"ออกจากระบบ");
+    active_log($db, $_SESSION['username'], "ออกจากระบบ");
     session_destroy();
     unset($_SESSION['username']);
     header('location: login.php');
-    
 }
 
 if (isset($_GET['deleteat_id'])) {
@@ -35,12 +34,14 @@ if (isset($_GET['deleteat_id'])) {
     #myTable thead th {
         color: black !important;
     }
+
+    
 </style>
 
 <body class="">
     <!-- Side Bar -->
     <div class="d-flex">
-        <nav class="bg-primary text-light p-3 vh-100 shadow border-end border-info" style="width: 280px; position:fixed;">
+        <nav class="bg-primary p-3 vh-100 shadow border-end border-info" style="width: 280px; position:fixed;">
             <a href="admin.php" class="d-flex align-items-center mb-4 text-white text-decoration-none ">
                 <svg class="bi me-2" width="40" height="32" aria-hidden="true">
                     <use xlink:href="#bootstrap"></use>
@@ -110,7 +111,7 @@ if (isset($_GET['deleteat_id'])) {
 
 
 
-            <button type="button" class="btn btn-outline-danger   w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout" style="color:white;">
+            <button type="button" class="btn btn-outline-danger w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout" style="color:white;">
                 <i class="fa-solid fa-right-from-bracket"></i> <b>Logout</b>
             </button>
             <!-- <button class="btn btn=danger w-100" onclick="logoutconfirm()">Logout</button>
@@ -154,7 +155,9 @@ if (isset($_GET['deleteat_id'])) {
                         <th>Department</th>
                         <th>Room</th>
                         <th>Status</th>
-                        <th style="display: none;">Detail</th>
+                        <th class="export-only">Detail</th>
+                        <th class="export-only">รายชื่อผู้ตรวจสอบ</th>
+                        <th class="export-only">เวลาทำการตรวจสอบ</th>
                         <th class="text-center">#</th>
                         <!-- <th>Delete</th> -->
                     </tr>
@@ -196,7 +199,9 @@ if (isset($_GET['deleteat_id'])) {
                         $thai_time = date("d/m/", $timestamp) . (date("Y", $timestamp) + 543);
 
                     ?>
-                        <tr>
+                        <tr data-detail="<?= htmlspecialchars($row['detail']) ?>"
+                            data-user="<?= htmlspecialchars($row['last_user_edit']) ?>"
+                            data-time="<?= htmlspecialchars($row['last_time_edit']) ?>">
                             <td class="text-center"><?php echo $row["number"] . '/' . $row["fiscal_year"] ?></td>
                             <td data-order="<?php echo $row["report_date"]; ?>">
                                 <?php echo $thai_time ?></td>
@@ -235,7 +240,10 @@ if (isset($_GET['deleteat_id'])) {
                                 ?>
                                 <span class="<?php echo $badge_status; ?>"><?php echo $status_text ?></span>
                             </td>
-                            <td style="display: none;"><?php echo $row['detail'] ?></td>
+                            <td class="export-only"><?= $row['detail']?></td>
+                            <td class="export-only"><?= $row['last_user_edit']?></td>
+                            <td class="export-only"><?= $row['last_time_edit']?></td>
+
                             <td><a href="inspect.php?check_id=<?php echo $row["id"]; ?>" class="btn btn-outline-success"><i class="fa-solid fa-eye"></i></a></td>
                             <!-- <td><a href="admin-delete.php?delete_id=<?php //echo $row['id']; 
                                                                             ?>" class="btn btn-outline-danger" onclick="return confirm('คุณต้องการจะลบข้อมูลนี้ใช่หรือไม่?')">Delete</a></td> -->
@@ -278,12 +286,25 @@ if (isset($_GET['deleteat_id'])) {
                     //     [0, "desc"]
                     // ],
                     dom: 'Bfrtip',
-                    buttons: [
-                        'copyHtml5',
-                        'excelHtml5',
-                        'csvHtml5',
-                        'pdfHtml5',
-                        'print'
+                    buttons: [{
+                            extend: 'copyHtml5',
+                            exportOptions:{
+                                columns: ':visible'
+                            }
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            text: 'Export to Excel',
+                            exportOptions: {
+                                columns: ':visible'
+                            }
+                        }
+                    ],
+                    columnDefs: [
+                        {
+                            targets: [6,7,8],
+                            visible: false
+                        }
                     ]
                 });
 
@@ -293,19 +314,15 @@ if (isset($_GET['deleteat_id'])) {
                     table.button('.buttons-copy').trigger();
                 });
 
-                $('#exportExcel').on('click', function() {
+                $('#exportExcel').on('click', function(){
+                    table.columns([6,7,8]).visible(true);
                     table.button('.buttons-excel').trigger();
-                });
 
-                $('#exportCSV').on('click', function() {
-                    table.button('.buttons-csv').trigger();
-                });
-
-                $('#exportPDF').on('click', function() {
-                    table.button('.buttons-pdf').trigger();
-                });
+                    setTimeout(() => {
+                        table.columns([6,7,8]).visible(false);
+                    }, 1000);
+                })
             });
-
 
 
             // Modal

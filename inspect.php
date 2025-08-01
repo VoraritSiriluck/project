@@ -67,7 +67,7 @@ if (isset($_GET['check_id'])) {
             <hr>
             <a href="admin.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"><b><i class="fa-solid fa-house"></i> Dash Board</b></a>
             <a href="manage.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"><b><i class="fa-solid fa-wrench"></i> Manage User & Room</b></a>
-            
+
             <a href="chart.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"><b><i class="fa-solid fa-chart-line"></i> Chart</b></a>
             <a href="index.php" class="btn btn-outline-light w-100 mb-2 shadow rounded"> <b><i class="fa-solid fa-file-invoice"></i> Back to Form</b></a>
             <button type="button" class="btn btn-outline-danger w-100 mb-2 shadow rounded" data-bs-toggle="modal" data-bs-target="#Logout">
@@ -85,7 +85,7 @@ if (isset($_GET['check_id'])) {
 
             <hr>
             <!-- Status -->
-            <form action="update-status.php" method="POST">
+            <!-- <form action="update-status.php" method="POST">
                 <input type="hidden" name="reporter_id" value="<?php echo $id; ?>">
                 <div class="bg-light bg-opacity-25 p-2 rounded shadow rounded">
                     <span class=" fs-4 "><b>Status : </b></span>
@@ -116,20 +116,18 @@ if (isset($_GET['check_id'])) {
                         </div>
                     </div>
 
-
                     <div class="mt-3" id="cancelReasonWrapper" style="display: <?php echo ($status == 'cancel') ? 'block' : 'none'; ?>;">
                         <label for="cancel_reason" class="form-label text-light">เหตุผลการยกเลิก :</label>
                         <textarea name="cancel_reason" id="cancel_reason" rows="3" class="form-control"><?php echo htmlspecialchars($cancel_reason ?? ''); ?></textarea>
                     </div>
 
-
                     <div class="text-end mt-3">
                         <button type="submit" class="btn btn-light shadow rounded">Update Status</button>
                     </div>
                 </div>
-            </form>
+            </form> -->
 
-            <script>
+            <!-- <script>
                 const radioCancel = document.getElementById('radioCancel');
                 const radios = document.querySelectorAll('input[name="status"]');
                 const radioReasoncancel = document.getElementById('cancelReasonWrapper');
@@ -144,7 +142,7 @@ if (isset($_GET['check_id'])) {
                         }
                     });
                 });
-            </script>
+            </script> -->
 
 
 
@@ -199,14 +197,65 @@ if (isset($_GET['check_id'])) {
                             </div>
 
                         </div>
-                        <!--RRRRR-->
-                        <!-- <div class="col ps-2 my-1 ">
-                        <div class="bg-white border border-black   my-2 ps-1 fs-5 text-black"><?php echo $reporter_fullname ?></div>
-                        <div class="bg-white border border-black   my-2 ps-1 fs-5 text-black"><?php echo $position ?></div>
-                        <div class="bg-white border border-black   my-2 ps-1 fs-5 text-black"><?php echo $thai_time ?></div>
-                        <div class="bg-white border border-black   my-2 ps-1 fs-5 text-black"><?php echo $room ?></div>
-                    </div>-->
 
+                        <!-- Status -->
+                        <form action="update-status.php" method="POST">
+                            <input type="hidden" name="reporter_id" value="<?php echo $id; ?>">
+                            <div class="bg-dark bg-opacity-50 text-light rounded shadow rounded w-75 my-3 px-5 py-2">
+                                <span class=" fs-4 "><b>Status : </b></span>
+                                <div class="text-center">
+                                    <div class="form-check mt-2 my-2">
+                                        <input class="form-check-input" type="radio" name="status" id="radiowaiting" value="waiting" <?php if ($status == 'waiting') echo 'checked'; ?>>
+                                        <label class="form-check-label bg-dark w-100 rounded text-light" for="radiowaiting">
+                                            รอตรวจสอบ
+                                        </label>
+                                    </div>
+                                    <div class="form-check my-2">
+                                        <input class="form-check-input" type="radio" name="status" id="radioProgress" value="in_progress" <?php if ($status == 'in_progress') echo 'checked'; ?>>
+                                        <label class="form-check-label bg-warning w-100 rounded text-dark" for="radioProgress">
+                                            อยู่ระหว่างดำเนินการ
+                                        </label>
+                                    </div>
+                                    <div class="form-check my-2">
+                                        <input class="form-check-input" type="radio" name="status" id="radioDone" value="done" <?php if ($status == 'done') echo 'checked'; ?>>
+                                        <label class="form-check-label bg-success w-100  rounded" for="radioDone">
+                                            ดำเนินการแล้วเสร็จ
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="status" id="radioCancel" value="cancel" <?php if ($status == 'cancel') echo 'checked'; ?>>
+                                        <label class="form-check-label bg-danger w-100 rounded " for="radioCancel">
+                                            ยกเลิก
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3" id="cancelReasonWrapper" style="display: <?php echo ($status == 'cancel') ? 'block' : 'none'; ?>;">
+                                    <label for="cancel_reason" class="form-label text-light">เหตุผลการยกเลิก :</label>
+                                    <textarea name="cancel_reason" id="cancel_reason" rows="3" class="form-control"><?php echo htmlspecialchars($cancel_reason ?? ''); ?></textarea>
+                                </div>
+
+                                <div class="text-end mt-3">
+                                    <button type="submit" class="btn btn-light shadow rounded">Update Status</button>
+                                </div>
+                            </div>
+                        </form>
+                        <script>
+                            const radioCancel = document.getElementById('radioCancel');
+                            const radios = document.querySelectorAll('input[name="status"]');
+                            const radioReasoncancel = document.getElementById('cancelReasonWrapper');
+
+
+                            radios.forEach(radio => {
+                                radio.addEventListener('change', function() {
+                                    if (radioCancel.checked) {
+                                        cancelReasonWrapper.style.display = 'block';
+                                    } else {
+                                        cancelReasonWrapper.style.display = 'none';
+                                    }
+                                });
+                            });
+                        </script>
                     </div>
                     <div>
 

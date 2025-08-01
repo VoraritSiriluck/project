@@ -215,7 +215,8 @@ if (isset($_REQUEST['btn_report'])) {
 
                 );
                 if ($insert_stmt->execute($params)) {
-                    $insertMsg = "Report  Succesfully...";
+                    $report_number = "( หมายเลขรายงานของคุณคือ " .  $next_number ."/" . $fiscal_year . " )";
+                    $insertMsg = "Report  Succesfully..." . $report_number;
                     header("Location: index.php?messageIS=" . $insertMsg);
                     die();
                 }

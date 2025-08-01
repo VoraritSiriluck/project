@@ -3,20 +3,7 @@ require_once('connection.php');
 
 //
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("location: login.php");
-    exit;
-}
 
-if (isset($_GET['logout'])) {
-    session_destroy();
-    unset($_SESSION['username']);
-    header('location: login.php');
-}
-
-if (isset($_GET['deleteat_id'])) {
-    $row = $_GET['deleteat_id'];
-}
 
 
 ?>
@@ -94,7 +81,7 @@ if (isset($_GET['deleteat_id'])) {
             <div class="container-fluid px-3">
                 <div class="row align-items-center justify-content-between mb-4 fs-3 ">
                     <div class="col mt-3">
-                        <h1 class="fw-bold text-primary"><b>ประวัติการรายงาน (ของนักวิทย์)</b></h1>
+                        <h1 class="fw-bold text-primary"><b>ประวัติการรายงาน</b></h1>
                         <h5 class="text-secondary">ตรวจสอบรายงาน</h5>
                     </div>
 
