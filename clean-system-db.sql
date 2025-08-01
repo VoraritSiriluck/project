@@ -11,11 +11,26 @@
  Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 18/07/2025 14:47:59
+ Date: 31/07/2025 13:20:33
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for activity_log
+-- ----------------------------
+DROP TABLE IF EXISTS `activity_log`;
+CREATE TABLE `activity_log`  (
+  `timestamp` datetime NOT NULL DEFAULT current_timestamp(),
+  `username` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `action` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`timestamp`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of activity_log
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for clean_report
@@ -50,14 +65,16 @@ CREATE TABLE `room`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `room_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of room
 -- ----------------------------
+INSERT INTO `room` VALUES (0, 'อื่นๆ');
 INSERT INTO `room` VALUES (1, 'ห้องประชุม');
 INSERT INTO `room` VALUES (2, 'ห้องน้ำ');
-INSERT INTO `room` VALUES (4, 'ห้องช่าง');
+INSERT INTO `room` VALUES (8, 'ห้องช่าง');
+INSERT INTO `room` VALUES (9, 'ห้องพักนักวิทย์');
 
 -- ----------------------------
 -- Table structure for user
